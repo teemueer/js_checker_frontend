@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import DragDrop from "./components/DragDrop";
-import useResource from "../hooks/useResource";
+import useResource from "./hooks/useResource";
 
 const App = () => {
   const [tests, testService] = useResource("/api/test");
