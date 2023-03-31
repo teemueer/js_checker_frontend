@@ -30,6 +30,14 @@ const App = () => {
       json: { elements },
     };
     testService.post(newTest);
+    
+  };
+
+  const onUpdate = async () => {
+    const updateTest = {
+      test: selectedTest
+    }
+    testService.update(updateTest)
   };
 
   const onNewElement = () => {
@@ -87,7 +95,7 @@ const App = () => {
   };
 
   const onChangeAttribute = (elementToChange, oldAttr, newAttr) => {
-    console.log("onRemoveAttribute");
+    console.log("onChangeAttribute");
     const newElements = elements.map((element) => {
       if (element === elementToChange) {
         const attrIndex = element.attrs.findIndex((attr) => attr === oldAttr);
@@ -133,6 +141,9 @@ const App = () => {
       <div>
         <button onClick={onNewElement}>New element</button>
         <button onClick={onSave}>Save</button>
+        {selectedTest && (
+          <button onClick={onUpdate}>Update</button>
+        )}
       </div>
       <div>
         {elements && (

@@ -18,7 +18,14 @@ const useResource = (baseUrl) => {
       .catch((error) => console.error(error.message));
   };
 
-  const service = { post };
+  const update = (test) =>{
+    axios
+        .post(`http://localhost:3000/api/test/update`, test)
+        .then((res) => console.log("Updated test"))
+        .catch((error) => console.error(error.message));
+  };
+
+  const service = { post, update };
 
   return [resources, service];
 };
