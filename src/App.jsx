@@ -105,7 +105,7 @@ const App = () => {
     setAssg(newAssg);
   };
 
-  const onAddElementText = async (index) => {
+  const onAddElementText = (index) => {
     console.log("onAddElementText");
     const newAssg = { ...assg };
     newAssg.items[index].texts.push("");
