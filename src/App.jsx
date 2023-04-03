@@ -11,6 +11,7 @@ const emptyElement = { type: "element", name: "", attrs: [], texts: [] };
 const emptyAttr = { name: "", value: "" };
 
 const emptyAssg = {
+
   name: "",
   items: [],
 };
@@ -21,8 +22,12 @@ const App = () => {
 
   // AssgSelector
   const onSelectAssg = (name) => {
+    if(name){
     const newAssg = assgs.find((assg) => assg.name === name);
     setAssg(newAssg);
+    }else{
+    setAssg(emptyAssg);
+    }
   };
 
   // Controls
@@ -37,6 +42,11 @@ const App = () => {
     console.log("onSave");
     assg._id ? assgService.patch(assg) : assgService.post(assg);
   };
+
+  const onRemove = () => {
+    console.log("onRemove");
+    assgService.remove(assg);
+  }
 
   // Prompt
   const onAddPrompt = () => {
@@ -150,6 +160,7 @@ const App = () => {
         onAddPrompt={onAddPrompt}
         onAddElement={onAddElement}
         onSave={onSave}
+        onRemove={onRemove}
       />
       <DragDrop
         items={assg.items}
