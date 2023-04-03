@@ -33,9 +33,14 @@ const App = () => {
     
   };
 
+  const onDelete = async () => {
+    testService.deleteTest(selectedTest._id);
+  }
+
   const onUpdate = async () => {
     const updateTest = {
-      test: selectedTest
+      test: selectedTest,
+      json: {elements},
     }
     testService.update(updateTest)
   };
@@ -143,6 +148,9 @@ const App = () => {
         <button onClick={onSave}>Save</button>
         {selectedTest && (
           <button onClick={onUpdate}>Update</button>
+        )}
+        {selectedTest && (
+          <button onClick={onDelete}>Delete</button>
         )}
       </div>
       <div>

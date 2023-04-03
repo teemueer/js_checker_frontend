@@ -25,7 +25,15 @@ const useResource = (baseUrl) => {
         .catch((error) => console.error(error.message));
   };
 
-  const service = { post, update };
+  const deleteTest = (id) => {
+    console.log(id);
+      axios
+      .delete(`http://localhost:3000/api/test/`, id)
+      .then((res) => console.log("Deleted test"))
+      .catch((error) => console.error(error.message));
+  };
+ 
+  const service = { post, update, deleteTest };
 
   return [resources, service];
 };
