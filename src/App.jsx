@@ -6,18 +6,12 @@ import useResource from "./hooks/useResource";
 import AssgJSON from "./components/AssgJSON";
 import AssgSelector from "./components/AssgSelector";
 
-const emptyPrompt = { type: "prompt", value: "" };
-const emptyElement = { type: "element", name: "", attrs: [], texts: [] };
-const emptyAttr = { name: "", value: "" };
-
-const emptyAssg = {
-  name: "",
-  items: [],
-};
-
 const App = () => {
   const [assgs, assgService] = useResource("/api/assignment");
-  const [assg, setAssg] = useState(emptyAssg);
+  const [assg, setAssg] = useState({
+    name: "",
+    items: [],
+  });
 
   // AssgSelector
   const onSelectAssg = (name) => {
@@ -28,8 +22,7 @@ const App = () => {
   // Controls
   const onChangeAssgName = (name) => {
     console.log("onChangeAssgName");
-    const newAssg = { ...assg };
-    newAssg.name = name;
+    const newAssg = { ...assg, name };
     setAssg(newAssg);
   };
 
@@ -42,7 +35,7 @@ const App = () => {
   const onAddPrompt = () => {
     console.log("onAddPrompt");
     const newAssg = { ...assg };
-    newAssg.items.push({ ...emptyPrompt });
+    newAssg.items.push({ type: "prompt", value: "" });
     setAssg(newAssg);
   };
 
@@ -57,7 +50,7 @@ const App = () => {
   const onAddElement = () => {
     console.log("onAddElement");
     const newAssg = { ...assg };
-    newAssg.items.push({ ...emptyElement });
+    newAssg.items.push({ type: "element", name: "", attrs: [], texts: [] });
     setAssg(newAssg);
   };
 
@@ -78,7 +71,7 @@ const App = () => {
   const onAddElementAttribute = (index) => {
     console.log("onAddElementAttribute");
     const newAssg = { ...assg };
-    newAssg.items[index].attrs.push({ ...emptyAttr });
+    newAssg.items[index].attrs.push({ name: "", value: "" });
     setAssg(newAssg);
   };
 
@@ -103,7 +96,7 @@ const App = () => {
     setAssg(newAssg);
   };
 
-  const onAddElementText = (index) => {
+  const onAddElementText = async (index) => {
     console.log("onAddElementText");
     const newAssg = { ...assg };
     newAssg.items[index].texts.push("");
@@ -151,6 +144,7 @@ const App = () => {
         onAddElement={onAddElement}
         onSave={onSave}
       />
+
       <DragDrop
         items={assg.items}
         onChangePrompt={onChangePrompt}
@@ -164,8 +158,10 @@ const App = () => {
         onRemoveElementText={onRemoveElementText}
         onChangeElementText={onChangeElementText}
         onDragEnd={onDragEnd}
-      ></DragDrop>
+      />
+
       <hr />
+
       <AssgJSON assg={assg} />
     </>
   );
