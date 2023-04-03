@@ -1,16 +1,7 @@
-div {
-  margin-bottom: 1em;
+.prompt, .element {
+  display: block;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #000;
 }
 
-#elements {
-  display: inline-block;
-  border: 1px solid #000;
-  padding: 0.5em 0.5em 0 0.5em;
-  margin-top: 0.5em;
-}
-
-.element {
-  border: 1px solid #000;
-  padding: 0.2em;
-  margin-bottom: 0.5em;
-}
