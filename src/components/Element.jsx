@@ -72,6 +72,7 @@ const Element = (props) => (
                   null
                   <input
                     type="checkbox"
+                    defaultChecked={attr.value === null}
                     onClick={(event) =>
                       props.onNullifyElementAttributeValue(props.index, index)
                     }
