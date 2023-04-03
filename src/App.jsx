@@ -105,6 +105,14 @@ const App = () => {
     setAssg(newAssg);
   };
 
+  const onNullifyElementAttributeValue = (index, attrIndex) => {
+    console.log("onNullifyElementAttributeValue");
+    const newAssg = { ...assg };
+    const value = newAssg.items[index].attrs[attrIndex].value;
+    newAssg.items[index].attrs[attrIndex].value = value === null ? "" : null;
+    setAssg(newAssg);
+  };
+
   const onAddElementText = (index) => {
     console.log("onAddElementText");
     const newAssg = { ...assg };
@@ -164,6 +172,7 @@ const App = () => {
         onRemoveElementAttribute={onRemoveElementAttribute}
         onChangeElementAttributeName={onChangeElementAttributeName}
         onChangeElementAttributeValue={onChangeElementAttributeValue}
+        onNullifyElementAttributeValue={onNullifyElementAttributeValue}
         onAddElementText={onAddElementText}
         onRemoveElementText={onRemoveElementText}
         onChangeElementText={onChangeElementText}

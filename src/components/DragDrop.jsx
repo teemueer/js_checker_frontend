@@ -36,6 +36,9 @@ const DragDrop = (props) => {
                         onChangeElementAttributeValue={
                           props.onChangeElementAttributeValue
                         }
+                        onNullifyElementAttributeValue={
+                          props.onNullifyElementAttributeValue
+                        }
                         onAddElementText={props.onAddElementText}
                         onRemoveElementText={props.onRemoveElementText}
                         onChangeElementText={props.onChangeElementText}

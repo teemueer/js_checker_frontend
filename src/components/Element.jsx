@@ -54,16 +54,30 @@ const Element = (props) => (
                     )
                   }
                 />
-                <input
-                  value={attr.value}
-                  onChange={(event) =>
-                    props.onChangeElementAttributeValue(
-                      props.index,
-                      index,
-                      event.target.value
-                    )
-                  }
-                />
+                {attr.value !== null ? (
+                  <input
+                    value={attr.value}
+                    onChange={(event) =>
+                      props.onChangeElementAttributeValue(
+                        props.index,
+                        index,
+                        event.target.value
+                      )
+                    }
+                  />
+                ) : (
+                  <input value="NULL" disabled />
+                )}
+                <label>
+                  null
+                  <input
+                    type="checkbox"
+                    onClick={(event) =>
+                      props.onNullifyElementAttributeValue(props.index, index)
+                    }
+                  />
+                </label>
+
                 <button
                   onClick={(event) =>
                     props.onRemoveElementAttribute(props.index, index)
