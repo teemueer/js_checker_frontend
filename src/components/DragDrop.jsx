@@ -1,31 +1,57 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Prompt from "./Prompt";
 import Element from "./Element";
 
-const DragDrop = (props) => (
-  <DragDropContext onDragEnd={props.onDragEnd}>
-    <Droppable droppableId="droppable">
-      {(provided, snapshot) => (
-        <div id="elements" ref={provided.innerRef} {...provided.droppableProps}>
-          {props.elements.map((element, index) => (
-            <Draggable key={index} draggableId={`${index}`} index={index}>
-              {(provided, snapshot) => (
-                <Element
-                  element={element}
-                  provided={provided}
-                  onChangeName={props.onChangeName}
-                  onSelectAction={props.onSelectAction}
-                  onAddAttribute={props.onAddAttribute}
-                  onChangeAttribute={props.onChangeAttribute}
-                  onRemoveAttribute={props.onRemoveAttribute}
-                />
-              )}
-            </Draggable>
-          ))}
-          {provided.placeholder}
-        </div>
-      )}
-    </Droppable>
-  </DragDropContext>
-);
+const DragDrop = (props) => {
+  return (
+    <DragDropContext onDragEnd={props.onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided, snapshot) => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            {props.items.map((item, index) => (
+              <Draggable key={index} draggableId={`${index}`} index={index}>
+                {(provided, snapshot) => (
+                  <>
+                    {item.type === "prompt" && (
+                      <Prompt
+                        prompt={item}
+                        index={index}
+                        onChangePrompt={props.onChangePrompt}
+                        provided={provided}
+                      />
+                    )}
+                    {item.type === "element" && (
+                      <Element
+                        element={item}
+                        index={index}
+                        onChangeElementName={props.onChangeElementName}
+                        onChangeElementAction={props.onChangeElementAction}
+                        onAddElementAttribute={props.onAddElementAttribute}
+                        onRemoveElementAttribute={
+                          props.onRemoveElementAttribute
+                        }
+                        onChangeElementAttributeName={
+                          props.onChangeElementAttributeName
+                        }
+                        onChangeElementAttributeValue={
+                          props.onChangeElementAttributeValue
+                        }
+                        onAddElementText={props.onAddElementText}
+                        onRemoveElementText={props.onRemoveElementText}
+                        onChangeElementText={props.onChangeElementText}
+                        provided={provided}
+                      />
+                    )}
+                  </>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  );
+};
 
 export default DragDrop;

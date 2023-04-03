@@ -6,34 +6,33 @@ const useResource = (baseUrl) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/test`)
+      .get(`http://localhost:3000/api/assignment`)
       .then((res) => setResources(res.data))
       .catch((error) => console.error(error.message));
   }, []);
 
-  const post = (test) => {
+  const post = (assg) => {
     axios
-      .post(`http://localhost:3000/api/test`, test)
-      .then((res) => console.log("Posted new test"))
+      .post(`http://localhost:3000/api/assignment`, assg)
+      .then((res) => console.log("Posted new assignment"))
       .catch((error) => console.error(error.message));
   };
 
-  const update = (test) =>{
+  const patch = (assg) => {
     axios
-        .post(`http://localhost:3000/api/test/update`, test)
-        .then((res) => console.log("Updated test"))
-        .catch((error) => console.error(error.message));
-  };
-
-  const deleteTest = (id) => {
-    console.log(id);
-      axios
-      .delete(`http://localhost:3000/api/test/${id}`, id)
-      .then((res) => console.log(`Deleted test`))
+      .patch(`http://localhost:3000/api/assignment/${assg._id}`, assg)
+      .then((res) => console.log("Patched assignment"))
       .catch((error) => console.error(error.message));
   };
- 
-  const service = { post, update, deleteTest };
+
+  const remove = (assg) => {
+    axios
+      .delete(`http://localhost:3000/api/assignment/${assg._id}`)
+      .then((res) => console.log("Removed assignment"))
+      .catch((error) => console.error(error.message));
+  };
+
+  const service = { post, patch, remove };
 
   return [resources, service];
 };

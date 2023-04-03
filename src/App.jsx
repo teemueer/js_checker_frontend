@@ -1,174 +1,178 @@
 import "./App.css";
 import { useState } from "react";
+import Controls from "./components/Controls";
 import DragDrop from "./components/DragDrop";
 import useResource from "./hooks/useResource";
+import AssgJSON from "./components/AssgJSON";
+import AssgSelector from "./components/AssgSelector";
 
 const App = () => {
-  const [tests, testService] = useResource("/api/test");
-  const [selectedTest, setSelectedTest] = useState(null);
-  const [elements, setElements] = useState([]);
-  const [testName, setTestName] = useState("");
+  const [assgs, assgService] = useResource("/api/assignment");
+  const [assg, setAssg] = useState({
+    name: "",
+    items: [],
+  });
 
-  const selectTest = (event) => {
-    const testName = event.target.value;
-
-    if (testName === "__new_test") {
-      setSelectedTest(null);
-      setElements([]);
+  // AssgSelector
+  const onSelectAssg = (name) => {
+    if (name) {
+      const newAssg = assgs.find((assg) => assg.name === name);
+      setAssg(newAssg);
     } else {
-      const test = tests.find((test) => test.name === testName);
-      if (test) {
-        setSelectedTest(test);
-        setElements(test.elements);
-      }
+      setAssg(emptyAssg);
     }
   };
 
-  const onSave = async () => {
-    const newTest = {
-      name: testName,
-      json: { elements },
-    };
-    testService.post(newTest);
-    
+  // Controls
+  const onChangeAssgName = (name) => {
+    console.log("onChangeAssgName");
+    const newAssg = { ...assg, name };
+    setAssg(newAssg);
   };
 
-  const onDelete = async () => {
-    testService.deleteTest(selectedTest._id);
-  }
-
-  const onUpdate = async () => {
-    const updateTest = {
-      test: selectedTest,
-      json: {elements},
-    }
-    testService.update(updateTest)
+  const onSave = () => {
+    console.log("onSave");
+    assg._id ? assgService.patch(assg) : assgService.post(assg);
   };
 
-  const onNewElement = () => {
-    const newElements = [...elements, { name: "", attrs: [] }];
-    setElements(newElements);
+  const onRemove = () => {
+    console.log("onRemove");
+    assgService.remove(assg);
   };
 
+  // Prompt
+  const onAddPrompt = () => {
+    console.log("onAddPrompt");
+    const newAssg = { ...assg };
+    newAssg.items.push({ type: "prompt", value: "" });
+    setAssg(newAssg);
+  };
+
+  const onChangePrompt = (index, value) => {
+    console.log("onChangePrompt");
+    const newAssg = { ...assg };
+    newAssg.items[index].value = value;
+    setAssg(newAssg);
+  };
+
+  // Element
+  const onAddElement = () => {
+    console.log("onAddElement");
+    const newAssg = { ...assg };
+    newAssg.items.push({ type: "element", name: "", attrs: [], texts: [] });
+    setAssg(newAssg);
+  };
+
+  const onChangeElementName = (index, name) => {
+    console.log("onChangeElementName");
+    const newAssg = { ...assg };
+    newAssg.items[index].name = name;
+    setAssg(newAssg);
+  };
+
+  const onChangeElementAction = (index, action) => {
+    console.log("onChangeElementAction");
+    const newAssg = { ...assg };
+    newAssg.items[index].action = action;
+    setAssg(newAssg);
+  };
+
+  const onAddElementAttribute = (index) => {
+    console.log("onAddElementAttribute");
+    const newAssg = { ...assg };
+    newAssg.items[index].attrs.push({ name: "", value: "" });
+    setAssg(newAssg);
+  };
+
+  const onRemoveElementAttribute = (index, attrIndex) => {
+    console.log("onRemoveElementAttribute");
+    const newAssg = { ...assg };
+    newAssg.items[index].attrs.splice(attrIndex, 1);
+    setAssg(newAssg);
+  };
+
+  const onChangeElementAttributeName = (index, attrIndex, name) => {
+    console.log("onChangeElementAttributeName");
+    const newAssg = { ...assg };
+    newAssg.items[index].attrs[attrIndex].name = name;
+    setAssg(newAssg);
+  };
+
+  const onChangeElementAttributeValue = (index, attrIndex, value) => {
+    console.log("onChangeElementAttributeValue");
+    const newAssg = { ...assg };
+    newAssg.items[index].attrs[attrIndex].value = value;
+    setAssg(newAssg);
+  };
+
+  const onAddElementText = (index) => {
+    console.log("onAddElementText");
+    const newAssg = { ...assg };
+    newAssg.items[index].texts.push("");
+    setAssg(newAssg);
+  };
+
+  const onRemoveElementText = (index, textIndex) => {
+    console.log("onRemoveElementText");
+    const newAssg = { ...assg };
+    newAssg.items[index].texts.splice(textIndex, 1);
+    setAssg(newAssg);
+  };
+
+  const onChangeElementText = (index, textIndex, text) => {
+    console.log("onChangeElementText");
+    const newAssg = { ...assg };
+    newAssg.items[index].texts[textIndex] = text;
+    setAssg(newAssg);
+  };
+
+  // Drag and Drop
   const onDragEnd = (result) => {
-    const newElements = Array.from(elements);
+    const newAssg = { ...assg };
     const src = result.source.index;
     if (result.destination) {
       const dst = result.destination.index;
-      [newElements[src], newElements[dst]] = [
-        newElements[dst],
-        newElements[src],
+      [newAssg.items[src], newAssg.items[dst]] = [
+        newAssg.items[dst],
+        newAssg.items[src],
       ];
     } else {
-      newElements.splice(src, 1);
+      newAssg.items.splice(src, 1);
     }
-    setElements(newElements);
-  };
-
-  const onChangeName = (elementToChange, newName) => {
-    console.log("onChangeName");
-    const newElements = elements.map((element) => {
-      if (element === elementToChange) {
-        element.name = newName;
-      }
-      return element;
-    });
-    setElements(newElements);
-  };
-
-  const onSelectAction = (elementToChange, newAction) => {
-    console.log("onSelectAction");
-    const newElements = elements.map((element) => {
-      if (element === elementToChange) {
-        newAction ? (element.action = newAction) : delete element.action;
-      }
-      return element;
-    });
-    setElements(newElements);
-  };
-
-  const onAddAttribute = (elementToChange) => {
-    console.log("onAddAttribute");
-    const newElements = elements.map((element) => {
-      if (element === elementToChange) {
-        if (!element.attrs) element.attrs = [];
-        element.attrs.push({ name: "", value: "" });
-      }
-      return element;
-    });
-    setElements(newElements);
-  };
-
-  const onChangeAttribute = (elementToChange, oldAttr, newAttr) => {
-    console.log("onChangeAttribute");
-    const newElements = elements.map((element) => {
-      if (element === elementToChange) {
-        const attrIndex = element.attrs.findIndex((attr) => attr === oldAttr);
-        element.attrs[attrIndex] = newAttr;
-      }
-      return element;
-    });
-    setElements(newElements);
-  };
-
-  const onRemoveAttribute = (elementToChange, attrToRemove) => {
-    console.log("onRemoveAttribute");
-    const newElements = elements.map((element) => {
-      if (element === elementToChange)
-        element.attrs = element.attrs.filter((attr) => attr !== attrToRemove);
-      return element;
-    });
-    setElements(newElements);
+    setAssg(newAssg);
   };
 
   return (
     <>
-      <div>
-        <label htmlFor="tests">Select test: </label>
-        <select id="tests" onChange={selectTest}>
-          <option value="__new_test">Create a new test</option>
-          {tests.map((test) => (
-            <option key={test.name} value={test.name}>
-              {test.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      {!selectedTest && (
-        <div>
-          <label htmlFor="test-name">Test name: </label>
-          <input
-            id="test-name"
-            onChange={(event) => setTestName(event.target.value)}
-          />
-        </div>
-      )}
-      <div>
-        <button onClick={onNewElement}>New element</button>
-        <button onClick={onSave}>Save</button>
-        {selectedTest && (
-          <button onClick={onUpdate}>Update</button>
-        )}
-        {selectedTest && (
-          <button onClick={onDelete}>Delete</button>
-        )}
-      </div>
-      <div>
-        {elements && (
-          <DragDrop
-            elements={elements}
-            onDragEnd={onDragEnd}
-            onChangeName={onChangeName}
-            onSelectAction={onSelectAction}
-            onAddAttribute={onAddAttribute}
-            onChangeAttribute={onChangeAttribute}
-            onRemoveAttribute={onRemoveAttribute}
-          />
-        )}
-      </div>
-      <div>
-        <pre>{elements && JSON.stringify(elements, null, "  ")}</pre>
-      </div>
+      <AssgSelector assgs={assgs} onSelectAssg={onSelectAssg} />
+
+      <Controls
+        assg={assg}
+        onChangeAssgName={onChangeAssgName}
+        onAddPrompt={onAddPrompt}
+        onAddElement={onAddElement}
+        onSave={onSave}
+        onRemove={onRemove}
+      />
+
+      <DragDrop
+        items={assg.items}
+        onChangePrompt={onChangePrompt}
+        onChangeElementName={onChangeElementName}
+        onChangeElementAction={onChangeElementAction}
+        onAddElementAttribute={onAddElementAttribute}
+        onRemoveElementAttribute={onRemoveElementAttribute}
+        onChangeElementAttributeName={onChangeElementAttributeName}
+        onChangeElementAttributeValue={onChangeElementAttributeValue}
+        onAddElementText={onAddElementText}
+        onRemoveElementText={onRemoveElementText}
+        onChangeElementText={onChangeElementText}
+        onDragEnd={onDragEnd}
+      />
+
+      <hr />
+
+      <AssgJSON assg={assg} />
     </>
   );
 };
