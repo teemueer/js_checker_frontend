@@ -28,8 +28,8 @@ const useResource = (baseUrl) => {
   const deleteTest = (id) => {
     console.log(id);
       axios
-      .delete(`http://localhost:3000/api/test/`, id)
-      .then((res) => console.log("Deleted test"))
+      .delete(`http://localhost:3000/api/test/${id}`, id)
+      .then((res) => console.log(`Deleted test`))
       .catch((error) => console.error(error.message));
   };
  
