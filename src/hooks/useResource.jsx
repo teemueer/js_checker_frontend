@@ -25,7 +25,14 @@ const useResource = (baseUrl) => {
       .catch((error) => console.error(error.message));
   };
 
-  const service = { post, patch };
+  const remove = (assg) => {
+    axios
+      .delete(`http://localhost:3000/api/assignment/${assg._id}`)
+      .then((res) => console.log("Removed assignment"))
+      .catch((error) => console.error(error.message));
+  };
+
+  const service = { post, patch, remove };
 
   return [resources, service];
 };
