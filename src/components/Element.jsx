@@ -11,6 +11,7 @@ const Element = (props) => (
           <td>Element:</td>
           <td colspan="4">
             <input
+              type="text"
               value={props.element.name}
               onChange={(event) =>
                 props.onChangeElementName(props.index, event.target.value)
@@ -45,6 +46,7 @@ const Element = (props) => (
             <td></td>
             <td>
               <input
+                type="text"
                 value={attr.name}
                 onChange={(event) =>
                   props.onChangeElementAttributeName(
@@ -58,6 +60,7 @@ const Element = (props) => (
             <td>
               {attr.value !== null ? (
                 <input
+                  type="text"
                   value={attr.value}
                   onChange={(event) =>
                     props.onChangeElementAttributeValue(
@@ -68,7 +71,7 @@ const Element = (props) => (
                   }
                 />
               ) : (
-                <input value="NULL" disabled />
+                <input type="text" value="NULL" disabled />
               )}
             </td>
             <td>
@@ -107,6 +110,7 @@ const Element = (props) => (
             <td></td>
             <td colspan="2" className="text">
               <input
+                type="text"
                 value={text}
                 onChange={(event) =>
                   props.onChangeElementText(
