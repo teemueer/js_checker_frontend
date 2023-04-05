@@ -60,6 +60,21 @@ const App = () => {
     setAssg(newAssg);
   };
 
+  // Confirm
+  const onAddConfirm = () => {
+    console.log("onAddConfirm");
+    const newAssg = { ...assg };
+    newAssg.items.push({ type: "confirm", value: "yes" });
+    setAssg(newAssg);
+  };
+
+  const onChangeConfirm = (index, value) => {
+    console.log("onChangeConfirm");
+    const newAssg = { ...assg };
+    newAssg.items[index].value = value;
+    setAssg(newAssg);
+  };
+
   // Prompt
   const onAddPrompt = () => {
     console.log("onAddPrompt");
@@ -136,7 +151,7 @@ const App = () => {
   const onAddElementText = (index) => {
     console.log("onAddElementText");
     const newAssg = { ...assg };
-    newAssg.items[index].texts.push("");
+    newAssg.items[index].texts.push({ value: "", regex: false });
     setAssg(newAssg);
   };
 
@@ -147,10 +162,18 @@ const App = () => {
     setAssg(newAssg);
   };
 
-  const onChangeElementText = (index, textIndex, text) => {
+  const onChangeElementTextValue = (index, textIndex, text) => {
     console.log("onChangeElementText");
     const newAssg = { ...assg };
-    newAssg.items[index].texts[textIndex] = text;
+    newAssg.items[index].texts[textIndex].value = text;
+    setAssg(newAssg);
+  };
+
+  const onChangeElementTextRegex = (index, textIndex) => {
+    console.log("onRegexifyElementText");
+    const newAssg = { ...assg };
+    const value = newAssg.items[index].texts[textIndex].regex;
+    newAssg.items[index].texts[textIndex].regex = !value;
     setAssg(newAssg);
   };
 
@@ -178,6 +201,7 @@ const App = () => {
         onAddPrompt={onAddPrompt}
         onAddElement={onAddElement}
         onAddReload={onAddReload}
+        onAddConfirm={onAddConfirm}
         onSave={onSave}
         onRemove={onRemove}
       />
@@ -186,6 +210,7 @@ const App = () => {
         <DragDrop
           items={assg.items}
           onChangePrompt={onChangePrompt}
+          onChangeConfirm={onChangeConfirm}
           onChangeElementName={onChangeElementName}
           onChangeElementAction={onChangeElementAction}
           onAddElementAttribute={onAddElementAttribute}
@@ -195,12 +220,13 @@ const App = () => {
           onNullifyElementAttributeValue={onNullifyElementAttributeValue}
           onAddElementText={onAddElementText}
           onRemoveElementText={onRemoveElementText}
-          onChangeElementText={onChangeElementText}
+          onChangeElementTextValue={onChangeElementTextValue}
+          onChangeElementTextRegex={onChangeElementTextRegex}
           onDragEnd={onDragEnd}
         />
       )}
 
-      {/*<AssgJSON assg={assg} />*/}
+      <AssgJSON assg={assg} />
     </>
   );
 };

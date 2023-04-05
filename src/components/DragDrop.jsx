@@ -2,6 +2,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Prompt from "./Prompt";
 import Element from "./Element";
 import Reload from "./Reload";
+import Confirm from "./Confirm";
 
 const DragDrop = (props) => {
   return (
@@ -28,6 +29,14 @@ const DragDrop = (props) => {
                     {item.type === "reload" && (
                       <Reload index={index} provided={provided} />
                     )}
+                    {item.type === "confirm" && (
+                      <Confirm
+                        confirm={item}
+                        index={index}
+                        onChangeConfirm={props.onChangeConfirm}
+                        provided={provided}
+                      />
+                    )}
                     {item.type === "element" && (
                       <Element
                         element={item}
@@ -49,7 +58,12 @@ const DragDrop = (props) => {
                         }
                         onAddElementText={props.onAddElementText}
                         onRemoveElementText={props.onRemoveElementText}
-                        onChangeElementText={props.onChangeElementText}
+                        onChangeElementTextValue={
+                          props.onChangeElementTextValue
+                        }
+                        onChangeElementTextRegex={
+                          props.onChangeElementTextRegex
+                        }
                         provided={provided}
                       />
                     )}

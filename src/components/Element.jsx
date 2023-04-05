@@ -111,15 +111,27 @@ const Element = (props) => (
             <td colSpan="2" className="text">
               <input
                 type="text"
-                value={text}
+                value={text.value}
                 onChange={(event) =>
-                  props.onChangeElementText(
+                  props.onChangeElementTextValue(
                     props.index,
                     index,
                     event.target.value
                   )
                 }
               />
+            </td>
+            <td>
+              <label>
+                <input
+                  type="checkbox"
+                  defaultChecked={text.regex === true}
+                  onClick={(event) =>
+                    props.onChangeElementTextRegex(props.index, index)
+                  }
+                />
+                regex
+              </label>
             </td>
             <td>
               <button
