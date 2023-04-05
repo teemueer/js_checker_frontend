@@ -3,15 +3,24 @@
 }
 
 body {
-  width: 1000px;
+  width: 800px;
 }
 
 table {
   border-collapse: collapse;
+  width: 100%;
+  background-color: beige;
 }
 
 td {
-  vertical-align: middle;
+  border: 1px dotted black;
+  text-align: left;
+}
+
+tr td:first-child {
+  width: 1%;
+  background-color:tan;
+  padding-right: 1em;
 }
 
 input[type="text"] {
@@ -21,7 +30,6 @@ input[type="text"] {
 .prompt, .element, .reload {
   display: block;
   margin: 5px;
-  padding: 5px;
   border: 1px solid #000;
 }
 

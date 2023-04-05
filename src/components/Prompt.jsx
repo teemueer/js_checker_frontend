@@ -11,6 +11,7 @@ const Prompt = (props) => (
           <td>Prompt:</td>
           <td>
             <input
+              type="text"
               value={props.prompt.value}
               onChange={(event) =>
                 props.onChangePrompt(props.index, event.target.value)
