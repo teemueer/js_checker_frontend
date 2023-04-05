@@ -6,28 +6,28 @@ const useResource = (baseUrl) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/assignment`)
+      .get(baseUrl)
       .then((res) => setResources(res.data))
       .catch((error) => console.error(error.message));
   }, []);
 
   const post = (assg) => {
     axios
-      .post(`http://localhost:3000/api/assignment`, assg)
+      .post(baseUrl, assg)
       .then((res) => console.log("Posted new assignment"))
       .catch((error) => console.error(error.message));
   };
 
   const patch = (assg) => {
     axios
-      .patch(`http://localhost:3000/api/assignment/${assg._id}`, assg)
+      .patch(`${baseUrl}/${assg._id}`, assg)
       .then((res) => console.log("Patched assignment"))
       .catch((error) => console.error(error.message));
   };
 
   const remove = (assg) => {
     axios
-      .delete(`http://localhost:3000/api/assignment/${assg._id}`)
+      .delete(`${baseUrl}/${assg._id}`)
       .then((res) => console.log("Removed assignment"))
       .catch((error) => console.error(error.message));
   };

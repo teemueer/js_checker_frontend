@@ -1,6 +1,7 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Prompt from "./Prompt";
 import Element from "./Element";
+import Reload from "./Reload";
 
 const DragDrop = (props) => {
   return (
@@ -19,6 +20,9 @@ const DragDrop = (props) => {
                         onChangePrompt={props.onChangePrompt}
                         provided={provided}
                       />
+                    )}
+                    {item.type === "reload" && (
+                      <Reload index={index} provided={provided} />
                     )}
                     {item.type === "element" && (
                       <Element

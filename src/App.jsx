@@ -7,7 +7,14 @@ import AssgJSON from "./components/AssgJSON";
 import AssgSelector from "./components/AssgSelector";
 
 const App = () => {
-  const [assgs, assgService] = useResource("/api/assignment");
+  const [assgs, assgService] = useResource(
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/api/assignment"
+      : "/api/assignment"
+  );
+
+  const [saved, setSaved] = useState(false);
+
   const [assg, setAssg] = useState({
     name: "",
     items: [],
@@ -19,7 +26,7 @@ const App = () => {
       const newAssg = assgs.find((assg) => assg.name === name);
       setAssg(newAssg);
     } else {
-      setAssg(emptyAssg);
+      setAssg({ name: "", items: [] });
     }
   };
 
@@ -32,12 +39,25 @@ const App = () => {
 
   const onSave = () => {
     console.log("onSave");
-    assg._id ? assgService.patch(assg) : assgService.post(assg);
+    if (assg._id || saved) {
+      assgService.patch(assg);
+    } else {
+      assgService.post(assg);
+      setSaved(true);
+    }
   };
 
   const onRemove = () => {
     console.log("onRemove");
     assgService.remove(assg);
+  };
+
+  // Reload
+  const onAddReload = () => {
+    console.log("onAddReload");
+    const newAssg = { ...assg };
+    newAssg.items.push({ type: "reload" });
+    setAssg(newAssg);
   };
 
   // Prompt
@@ -159,6 +179,7 @@ const App = () => {
         onChangeAssgName={onChangeAssgName}
         onAddPrompt={onAddPrompt}
         onAddElement={onAddElement}
+        onAddReload={onAddReload}
         onSave={onSave}
         onRemove={onRemove}
       />
@@ -179,9 +200,7 @@ const App = () => {
         onDragEnd={onDragEnd}
       />
 
-      <hr />
-
-      <AssgJSON assg={assg} />
+      {/*<AssgJSON assg={assg} />*/}
     </>
   );
 };

@@ -6,6 +6,7 @@ const Controls = (props) => (
     />
     <button onClick={props.onAddPrompt}>New prompt</button>
     <button onClick={props.onAddElement}>New element</button>
+    <button onClick={props.onAddReload}>New reload</button>
     <button onClick={props.onSave}>Save</button>
     <button onClick={props.onRemove}>Remove</button>
   </div>
