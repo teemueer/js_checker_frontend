@@ -9,7 +9,7 @@ const Element = (props) => (
       <tbody>
         <tr>
           <td>Element:</td>
-          <td>
+          <td colspan="3">
             <input
               value={props.element.name}
               onChange={(event) =>
@@ -20,7 +20,7 @@ const Element = (props) => (
         </tr>
         <tr>
           <td>Action:</td>
-          <td>
+          <td colspan="3">
             <select
               value={props.element.action}
               onChange={(event) => {
@@ -34,95 +34,98 @@ const Element = (props) => (
         </tr>
         <tr>
           <td>Attributes:</td>
-          <td>
+          <td colspan="3">
             <button onClick={() => props.onAddElementAttribute(props.index)}>
               +
             </button>
           </td>
         </tr>
-        <tr>
-          <td colSpan="2">
-            {props.element.attrs.map((attr, index) => (
-              <div key={index}>
+        {props.element.attrs.map((attr, index) => (
+          <tr key={index} className="attr">
+            <td>
+              <input
+                value={attr.name}
+                onChange={(event) =>
+                  props.onChangeElementAttributeName(
+                    props.index,
+                    index,
+                    event.target.value
+                  )
+                }
+              />
+            </td>
+            <td>
+              {attr.value !== null ? (
                 <input
-                  value={attr.name}
+                  value={attr.value}
                   onChange={(event) =>
-                    props.onChangeElementAttributeName(
+                    props.onChangeElementAttributeValue(
                       props.index,
                       index,
                       event.target.value
                     )
                   }
                 />
-                {attr.value !== null ? (
-                  <input
-                    value={attr.value}
-                    onChange={(event) =>
-                      props.onChangeElementAttributeValue(
-                        props.index,
-                        index,
-                        event.target.value
-                      )
-                    }
-                  />
-                ) : (
-                  <input value="NULL" disabled />
-                )}
-                <label>
-                  null
-                  <input
-                    type="checkbox"
-                    defaultChecked={attr.value === null}
-                    onClick={(event) =>
-                      props.onNullifyElementAttributeValue(props.index, index)
-                    }
-                  />
-                </label>
-
-                <button
+              ) : (
+                <input value="NULL" disabled />
+              )}
+            </td>
+            <td>
+              <label>
+                <input
+                  type="checkbox"
+                  defaultChecked={attr.value === null}
                   onClick={(event) =>
-                    props.onRemoveElementAttribute(props.index, index)
+                    props.onNullifyElementAttributeValue(props.index, index)
                   }
-                >
-                  x
-                </button>
-              </div>
-            ))}
-          </td>
-        </tr>
+                />
+                null
+              </label>
+            </td>
+            <td>
+              <button
+                onClick={(event) =>
+                  props.onRemoveElementAttribute(props.index, index)
+                }
+              >
+                x
+              </button>
+            </td>
+          </tr>
+        ))}
         <tr>
           <td>Texts:</td>
-          <td>
+          <td colspan="3">
             <button onClick={() => props.onAddElementText(props.index)}>
               +
             </button>
           </td>
         </tr>
-        <tr>
-          <td colSpan="2">
-            {props.element.texts.map((text, index) => (
-              <div key={index}>
-                <input
-                  value={text}
-                  onChange={(event) =>
-                    props.onChangeElementText(
-                      props.index,
-                      index,
-                      event.target.value
-                    )
-                  }
-                />
-                <button
-                  onClick={(event) =>
-                    props.onRemoveElementText(props.index, index)
-                  }
-                >
-                  x
-                </button>
-              </div>
-            ))}
-          </td>
-        </tr>
+        {props.element.texts.map((text, index) => (
+          <tr key={index}>
+            <td colspan="3" className="text">
+              <input
+                value={text}
+                onChange={(event) =>
+                  props.onChangeElementText(
+                    props.index,
+                    index,
+                    event.target.value
+                  )
+                }
+              />
+            </td>
+            <td>
+              <button
+                onClick={(event) =>
+                  props.onRemoveElementText(props.index, index)
+                }
+              >
+                x
+              </button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   </div>
