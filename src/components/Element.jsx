@@ -9,7 +9,7 @@ const Element = (props) => (
       <tbody>
         <tr>
           <td>Element:</td>
-          <td colspan="4">
+          <td colSpan="4">
             <input
               type="text"
               value={props.element.name}
@@ -21,7 +21,7 @@ const Element = (props) => (
         </tr>
         <tr>
           <td>Action:</td>
-          <td colspan="4">
+          <td colSpan="4">
             <select
               value={props.element.action}
               onChange={(event) => {
@@ -35,7 +35,7 @@ const Element = (props) => (
         </tr>
         <tr>
           <td>Attributes:</td>
-          <td colspan="4">
+          <td colSpan="4">
             <button onClick={() => props.onAddElementAttribute(props.index)}>
               +
             </button>
@@ -99,7 +99,7 @@ const Element = (props) => (
         ))}
         <tr>
           <td>Texts:</td>
-          <td colspan="4">
+          <td colSpan="4">
             <button onClick={() => props.onAddElementText(props.index)}>
               +
             </button>
@@ -108,7 +108,7 @@ const Element = (props) => (
         {props.element.texts.map((text, index) => (
           <tr key={index}>
             <td></td>
-            <td colspan="2" className="text">
+            <td colSpan="2" className="text">
               <input
                 type="text"
                 value={text}

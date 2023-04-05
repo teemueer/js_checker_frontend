@@ -27,6 +27,12 @@ input[type="text"] {
   width: 100%;
 }
 
+.assignment {
+  border: 2px solid black;
+  margin-top: 0.5em;
+  padding: 0.2em;
+}
+
 .prompt, .element, .reload {
   display: block;
   margin: 5px;

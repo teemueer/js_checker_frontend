@@ -8,7 +8,11 @@ const DragDrop = (props) => {
     <DragDropContext onDragEnd={props.onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided, snapshot) => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
+          <div
+            className="assignment"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
             {props.items.map((item, index) => (
               <Draggable key={index} draggableId={`${index}`} index={index}>
                 {(provided, snapshot) => (

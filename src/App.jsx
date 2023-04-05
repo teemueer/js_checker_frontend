@@ -160,10 +160,8 @@ const App = () => {
     const src = result.source.index;
     if (result.destination) {
       const dst = result.destination.index;
-      [newAssg.items[src], newAssg.items[dst]] = [
-        newAssg.items[dst],
-        newAssg.items[src],
-      ];
+      const [removed] = newAssg.items.splice(src, 1);
+      newAssg.items.splice(dst, 0, removed);
     } else {
       newAssg.items.splice(src, 1);
     }
@@ -184,21 +182,23 @@ const App = () => {
         onRemove={onRemove}
       />
 
-      <DragDrop
-        items={assg.items}
-        onChangePrompt={onChangePrompt}
-        onChangeElementName={onChangeElementName}
-        onChangeElementAction={onChangeElementAction}
-        onAddElementAttribute={onAddElementAttribute}
-        onRemoveElementAttribute={onRemoveElementAttribute}
-        onChangeElementAttributeName={onChangeElementAttributeName}
-        onChangeElementAttributeValue={onChangeElementAttributeValue}
-        onNullifyElementAttributeValue={onNullifyElementAttributeValue}
-        onAddElementText={onAddElementText}
-        onRemoveElementText={onRemoveElementText}
-        onChangeElementText={onChangeElementText}
-        onDragEnd={onDragEnd}
-      />
+      {assg.items.length > 0 && (
+        <DragDrop
+          items={assg.items}
+          onChangePrompt={onChangePrompt}
+          onChangeElementName={onChangeElementName}
+          onChangeElementAction={onChangeElementAction}
+          onAddElementAttribute={onAddElementAttribute}
+          onRemoveElementAttribute={onRemoveElementAttribute}
+          onChangeElementAttributeName={onChangeElementAttributeName}
+          onChangeElementAttributeValue={onChangeElementAttributeValue}
+          onNullifyElementAttributeValue={onNullifyElementAttributeValue}
+          onAddElementText={onAddElementText}
+          onRemoveElementText={onRemoveElementText}
+          onChangeElementText={onChangeElementText}
+          onDragEnd={onDragEnd}
+        />
+      )}
 
       {/*<AssgJSON assg={assg} />*/}
     </>
