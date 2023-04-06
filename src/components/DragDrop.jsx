@@ -3,6 +3,7 @@ import Prompt from "./Prompt";
 import Element from "./Element";
 import Reload from "./Reload";
 import Confirm from "./Confirm";
+import Console from "./Console";
 
 const DragDrop = (props) => {
   return (
@@ -34,6 +35,15 @@ const DragDrop = (props) => {
                         confirm={item}
                         index={index}
                         onChangeConfirm={props.onChangeConfirm}
+                        provided={provided}
+                      />
+                    )}
+                    {item.type === "console" && (
+                      <Console
+                        console={item}
+                        index={index}
+                        onChangeConsoleValue={props.onChangeConsoleValue}
+                        onChangeConsoleRegex={props.onChangeConsoleRegex}
                         provided={provided}
                       />
                     )}

@@ -39,6 +39,14 @@ input[type="text"] {
   border: 1px solid #000;
 }
 
+#controls {
+  width: 100%;
+}
+
 .attr, .text {
 
+}
+
+.api-buttons {
+  float: right;
 }

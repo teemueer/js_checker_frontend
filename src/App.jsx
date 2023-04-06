@@ -13,8 +13,6 @@ const App = () => {
       : "/api/assignment"
   );
 
-  const [saved, setSaved] = useState(false);
-
   const [assg, setAssg] = useState({
     name: "",
     items: [],
@@ -39,17 +37,22 @@ const App = () => {
 
   const onSave = () => {
     console.log("onSave");
-    if (assg._id || saved) {
+    if (assg._id) {
       assgService.patch(assg);
     } else {
-      assgService.post(assg);
-      setSaved(true);
+      assgService.post(assg).then((savedAssg) => {
+        const newAssg = { ...assg };
+        newAssg._id = savedAssg._id;
+        setAssg(newAssg);
+      });
     }
   };
 
   const onRemove = () => {
     console.log("onRemove");
-    assgService.remove(assg);
+    if (confirm(`Remove assignment '${assg.name}'`) === true) {
+      if (assg._id) assgService.remove(assg);
+    }
   };
 
   // Reload
@@ -72,6 +75,29 @@ const App = () => {
     console.log("onChangeConfirm");
     const newAssg = { ...assg };
     newAssg.items[index].value = value;
+    setAssg(newAssg);
+  };
+
+  // Console
+  const onAddConsole = () => {
+    console.log("onAddConsole");
+    const newAssg = { ...assg };
+    newAssg.items.push({ type: "console", value: "", regex: false });
+    setAssg(newAssg);
+  };
+
+  const onChangeConsoleValue = (index, value) => {
+    console.log("onChangeConsole");
+    const newAssg = { ...assg };
+    newAssg.items[index].value = value;
+    setAssg(newAssg);
+  };
+
+  const onChangeConsoleRegex = (index) => {
+    console.log("onChangeConsoleRegex");
+    const newAssg = { ...assg };
+    const value = newAssg.items[index].regex;
+    newAssg.items[index].regex = !value;
     setAssg(newAssg);
   };
 
@@ -202,6 +228,7 @@ const App = () => {
         onAddElement={onAddElement}
         onAddReload={onAddReload}
         onAddConfirm={onAddConfirm}
+        onAddConsole={onAddConsole}
         onSave={onSave}
         onRemove={onRemove}
       />
@@ -211,6 +238,8 @@ const App = () => {
           items={assg.items}
           onChangePrompt={onChangePrompt}
           onChangeConfirm={onChangeConfirm}
+          onChangeConsoleValue={onChangeConsoleValue}
+          onChangeConsoleRegex={onChangeConsoleRegex}
           onChangeElementName={onChangeElementName}
           onChangeElementAction={onChangeElementAction}
           onAddElementAttribute={onAddElementAttribute}
