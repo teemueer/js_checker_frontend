@@ -12,10 +12,14 @@ const useResource = (baseUrl) => {
   }, []);
 
   const post = (assg) => {
-    axios
-      .post(baseUrl, assg)
-      .then((res) => console.log("Posted new assignment"))
-      .catch((error) => console.error(error.message));
+    return new Promise((resolve, reject) => {
+      axios
+        .post(baseUrl, assg)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => console.error(error.message));
+    });
   };
 
   const patch = (assg) => {
