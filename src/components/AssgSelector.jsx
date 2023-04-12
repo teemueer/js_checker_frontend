@@ -1,5 +1,5 @@
 const AssgSelector = (props) => (
-  <div>
+  <div id="assg-selector">
     <select onChange={(event) => props.onSelectAssg(event.target.value)}>
       <option value="">-- New assignment --</option>
       {props.assgs.map((assg, index) => (

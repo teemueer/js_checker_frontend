@@ -101,6 +101,21 @@ const App = () => {
     setAssg(newAssg);
   };
 
+  // Script check
+  const onAddScriptCheck = () => {
+    console.log("onAddScriptCheck");
+    const newAssg = { ...assg };
+    newAssg.items.push({ type: "script", value: "" });
+    setAssg(newAssg);
+  };
+
+  const onChangeScriptValue = (index, value) => {
+    console.log("onChangeScriptValue");
+    const newAssg = { ...assg };
+    newAssg.items[index].value = value;
+    setAssg(newAssg);
+  };
+
   // Prompt
   const onAddPrompt = () => {
     console.log("onAddPrompt");
@@ -128,6 +143,13 @@ const App = () => {
     console.log("onChangeElementName");
     const newAssg = { ...assg };
     newAssg.items[index].name = name;
+    setAssg(newAssg);
+  };
+
+  const onChangeElementInput = (index, input) => {
+    console.log("onChangeElementInput");
+    const newAssg = { ...assg };
+    newAssg.items[index].input = input;
     setAssg(newAssg);
   };
 
@@ -219,43 +241,50 @@ const App = () => {
 
   return (
     <>
-      <AssgSelector assgs={assgs} onSelectAssg={onSelectAssg} />
+      <div id="header">
+        <AssgSelector assgs={assgs} onSelectAssg={onSelectAssg} />
 
-      <Controls
-        assg={assg}
-        onChangeAssgName={onChangeAssgName}
-        onAddPrompt={onAddPrompt}
-        onAddElement={onAddElement}
-        onAddReload={onAddReload}
-        onAddConfirm={onAddConfirm}
-        onAddConsole={onAddConsole}
-        onSave={onSave}
-        onRemove={onRemove}
-      />
-
-      {assg.items.length > 0 && (
-        <DragDrop
-          items={assg.items}
-          onChangePrompt={onChangePrompt}
-          onChangeConfirm={onChangeConfirm}
-          onChangeConsoleValue={onChangeConsoleValue}
-          onChangeConsoleRegex={onChangeConsoleRegex}
-          onChangeElementName={onChangeElementName}
-          onChangeElementAction={onChangeElementAction}
-          onAddElementAttribute={onAddElementAttribute}
-          onRemoveElementAttribute={onRemoveElementAttribute}
-          onChangeElementAttributeName={onChangeElementAttributeName}
-          onChangeElementAttributeValue={onChangeElementAttributeValue}
-          onNullifyElementAttributeValue={onNullifyElementAttributeValue}
-          onAddElementText={onAddElementText}
-          onRemoveElementText={onRemoveElementText}
-          onChangeElementTextValue={onChangeElementTextValue}
-          onChangeElementTextRegex={onChangeElementTextRegex}
-          onDragEnd={onDragEnd}
+        <Controls
+          assg={assg}
+          onChangeAssgName={onChangeAssgName}
+          onAddPrompt={onAddPrompt}
+          onAddElement={onAddElement}
+          onAddReload={onAddReload}
+          onAddConfirm={onAddConfirm}
+          onAddConsole={onAddConsole}
+          onAddScriptCheck={onAddScriptCheck}
+          onSave={onSave}
+          onRemove={onRemove}
         />
-      )}
+      </div>
 
-      <AssgJSON assg={assg} />
+      <div id="content">
+        {assg.items.length > 0 && (
+          <DragDrop
+            items={assg.items}
+            onChangePrompt={onChangePrompt}
+            onChangeConfirm={onChangeConfirm}
+            onChangeConsoleValue={onChangeConsoleValue}
+            onChangeConsoleRegex={onChangeConsoleRegex}
+            onChangeScriptValue={onChangeScriptValue}
+            onChangeElementName={onChangeElementName}
+            onChangeElementInput={onChangeElementInput}
+            onChangeElementAction={onChangeElementAction}
+            onAddElementAttribute={onAddElementAttribute}
+            onRemoveElementAttribute={onRemoveElementAttribute}
+            onChangeElementAttributeName={onChangeElementAttributeName}
+            onChangeElementAttributeValue={onChangeElementAttributeValue}
+            onNullifyElementAttributeValue={onNullifyElementAttributeValue}
+            onAddElementText={onAddElementText}
+            onRemoveElementText={onRemoveElementText}
+            onChangeElementTextValue={onChangeElementTextValue}
+            onChangeElementTextRegex={onChangeElementTextRegex}
+            onDragEnd={onDragEnd}
+          />
+        )}
+
+        {<AssgJSON assg={assg} />}
+      </div>
     </>
   );
 };
