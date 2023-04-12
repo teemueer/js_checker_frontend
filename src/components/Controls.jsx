@@ -12,6 +12,7 @@ const Controls = (props) => (
       <button onClick={props.onAddReload}>New reload</button>
       <button onClick={props.onAddConfirm}>New confirm</button>
       <button onClick={props.onAddConsole}>New console</button>
+      <button onClick={props.onAddScriptCheck}>New script check</button>
     </span>
     <span className="api-buttons">
       <button onClick={props.onSave}>Save</button>

@@ -20,6 +20,18 @@ const Element = (props) => (
           </td>
         </tr>
         <tr>
+          <td>Input:</td>
+          <td colSpan="4">
+            <input
+              type="text"
+              value={props.element.input}
+              onChange={(event) =>
+                props.onChangeElementInput(props.index, event.target.value)
+              }
+            />
+          </td>
+        </tr>
+        <tr>
           <td>Action:</td>
           <td colSpan="4">
             <select
@@ -30,6 +42,8 @@ const Element = (props) => (
             >
               <option value="">None</option>
               <option value="click">Click</option>
+              <option value="enter">Enter</option>
+              <option value="hover">Hover</option>
             </select>
           </td>
         </tr>
@@ -125,7 +139,7 @@ const Element = (props) => (
               <label>
                 <input
                   type="checkbox"
-                  defaultChecked={text.regex === true}
+                  checked={text.regex}
                   onClick={(event) =>
                     props.onChangeElementTextRegex(props.index, index)
                   }

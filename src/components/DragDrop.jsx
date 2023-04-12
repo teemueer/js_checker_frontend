@@ -4,6 +4,7 @@ import Element from "./Element";
 import Reload from "./Reload";
 import Confirm from "./Confirm";
 import Console from "./Console";
+import Script from "./Script";
 
 const DragDrop = (props) => {
   return (
@@ -47,11 +48,20 @@ const DragDrop = (props) => {
                         provided={provided}
                       />
                     )}
+                    {item.type === "script" && (
+                      <Script
+                        script={item}
+                        index={index}
+                        onChangeScriptValue={props.onChangeScriptValue}
+                        provided={provided}
+                      />
+                    )}
                     {item.type === "element" && (
                       <Element
                         element={item}
                         index={index}
                         onChangeElementName={props.onChangeElementName}
+                        onChangeElementInput={props.onChangeElementInput}
                         onChangeElementAction={props.onChangeElementAction}
                         onAddElementAttribute={props.onAddElementAttribute}
                         onRemoveElementAttribute={
