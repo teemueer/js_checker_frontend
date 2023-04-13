@@ -51,5 +51,20 @@ input[type="text"] {
 }
 
 .api-buttons {
-  float: right;
+  margin-left: 2em;
+}
+
+#header {
+  position: fixed;
+  z-index: 999;
+  background-color: white;
+  top: 0;
+  border-bottom: 2px solid black;
+  width: 1000px;
+}
+
+#content {
+  margin-top: 100px;
+  position: relative;
+  margin-bottom: 500px;
 }

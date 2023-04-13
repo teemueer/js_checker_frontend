@@ -283,7 +283,7 @@ const App = () => {
           />
         )}
 
-        {<AssgJSON assg={assg} />}
+        {/*<AssgJSON assg={assg} />*/}
       </div>
     </>
   );
