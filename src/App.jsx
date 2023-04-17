@@ -225,6 +225,13 @@ const App = () => {
     setAssg(newAssg);
   };
 
+  const onChangeDescription = (index, description) => {
+    console.log("onChangeDescription");
+    const newAssg = { ...assg };
+    newAssg.items[index].description = description;
+    setAssg(newAssg);
+  };
+
   // Drag and Drop
   const onDragEnd = (result) => {
     const newAssg = { ...assg };
@@ -279,11 +286,12 @@ const App = () => {
             onRemoveElementText={onRemoveElementText}
             onChangeElementTextValue={onChangeElementTextValue}
             onChangeElementTextRegex={onChangeElementTextRegex}
+            onChangeDescription={onChangeDescription}
             onDragEnd={onDragEnd}
           />
         )}
 
-        {/*<AssgJSON assg={assg} />*/}
+        {<AssgJSON assg={assg} />}
       </div>
     </>
   );
