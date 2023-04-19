@@ -22,11 +22,23 @@ const Console = (props) => (
             <label>
               <input
                 type="checkbox"
-                defaultChecked={props.console.regex === true}
-                onClick={(event) => props.onChangeConsoleRegex(props.index)}
+                checked={props.console.regex === true}
+                onChange={(event) => props.onChangeConsoleRegex(props.index)}
               />
               regex
             </label>
+          </td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td colSpan="3">
+            <input
+              type="text"
+              value={props.console.description || ""}
+              onChange={(event) =>
+                props.onChangeDescription(props.index, event.target.value)
+              }
+            />
           </td>
         </tr>
       </tbody>

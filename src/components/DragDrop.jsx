@@ -45,6 +45,7 @@ const DragDrop = (props) => {
                         index={index}
                         onChangeConsoleValue={props.onChangeConsoleValue}
                         onChangeConsoleRegex={props.onChangeConsoleRegex}
+                        onChangeDescription={props.onChangeDescription}
                         provided={provided}
                       />
                     )}
@@ -53,6 +54,7 @@ const DragDrop = (props) => {
                         script={item}
                         index={index}
                         onChangeScriptValue={props.onChangeScriptValue}
+                        onChangeDescription={props.onChangeDescription}
                         provided={provided}
                       />
                     )}
@@ -84,6 +86,7 @@ const DragDrop = (props) => {
                         onChangeElementTextRegex={
                           props.onChangeElementTextRegex
                         }
+                        onChangeDescription={props.onChangeDescription}
                         provided={provided}
                       />
                     )}

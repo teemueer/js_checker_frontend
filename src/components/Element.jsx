@@ -24,7 +24,7 @@ const Element = (props) => (
           <td colSpan="4">
             <input
               type="text"
-              value={props.element.input}
+              value={props.element.input || ""}
               onChange={(event) =>
                 props.onChangeElementInput(props.index, event.target.value)
               }
@@ -92,8 +92,8 @@ const Element = (props) => (
               <label>
                 <input
                   type="checkbox"
-                  defaultChecked={attr.value === null}
-                  onClick={(event) =>
+                  checked={attr.value === null}
+                  onChange={(event) =>
                     props.onNullifyElementAttributeValue(props.index, index)
                   }
                 />
@@ -140,7 +140,7 @@ const Element = (props) => (
                 <input
                   type="checkbox"
                   checked={text.regex}
-                  onClick={(event) =>
+                  onChange={(event) =>
                     props.onChangeElementTextRegex(props.index, index)
                   }
                 />
@@ -158,6 +158,18 @@ const Element = (props) => (
             </td>
           </tr>
         ))}
+        <tr>
+          <td>Description:</td>
+          <td colSpan="4">
+            <input
+              type="text"
+              value={props.element.description || ""}
+              onChange={(event) =>
+                props.onChangeDescription(props.index, event.target.value)
+              }
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
