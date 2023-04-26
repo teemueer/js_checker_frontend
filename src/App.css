@@ -1,70 +1,63 @@
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  width: 1000px;
+  margin: 0;
 }
 
-table {
+nav {
+  background-color: lightgray;
+}
+
+nav .title {
+  font-weight: bold;
+}
+
+nav span {
+  margin: 1em;
+}
+
+#content {
+  margin: 1em;
+  width: 800px;
+}
+
+#assignment-controls {
+  margin-bottom: 1em;
+}
+
+#assignment-controls #api-buttons {
+  float: right;
+}
+
+#assignment-items {
+  border: 2px solid black;
+  padding: 0.5em 0.5em 0 0.5em;
+}
+
+#assignment-items table {
   border-collapse: collapse;
   width: 100%;
   background-color: beige;
+  border: 1px solid black;
+  margin-bottom: 0.5em;
 }
 
-td {
+#assignment-items td {
   border: 1px dotted black;
   text-align: left;
 }
 
-tr td:first-child {
+#assignment-items tr td:first-child {
   width: 1%;
   white-space: nowrap;
-  background-color:tan;
+  background-color: tan;
   padding-right: 1em;
 }
 
-input[type="text"] {
+#assignment-items input[type="text"] {
   width: 100%;
-  font-family:'Courier New', Courier, monospace;
-}
-
-.assignment {
-  border: 2px solid black;
-  padding: 0.2em;
-}
-
-.prompt, .element, .reload, .console, .script {
-  display: block;
-  margin: 5px;
-  border: 1px solid #000;
-}
-
-#controls {
-  width: 100%;
-  margin-bottom: 1em;
-}
-
-.attr, .text {
-
-}
-
-.api-buttons {
-  margin-left: 2em;
-}
-
-#header {
-  position: fixed;
-  z-index: 999;
-  background-color: white;
-  top: 0;
-  border-bottom: 2px solid black;
-  width: 1000px;
-}
-
-#content {
-  margin-top: 100px;
-  position: relative;
-  margin-bottom: 500px;
+  font-family: "Courier New", Courier, monospace;
 }
