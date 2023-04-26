@@ -14,7 +14,7 @@ const Prompt = (props) => (
               type="text"
               value={props.prompt.value}
               onChange={(event) =>
-                props.onChangePrompt(props.index, event.target.value)
+                props.onChangeValue(props.index, event.target.value)
               }
             />
           </td>

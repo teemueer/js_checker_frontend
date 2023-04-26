@@ -14,7 +14,7 @@ const Console = (props) => (
               type="text"
               value={props.console.value}
               onChange={(event) =>
-                props.onChangeConsoleValue(props.index, event.target.value)
+                props.onChangeValue(props.index, event.target.value)
               }
             />
           </td>

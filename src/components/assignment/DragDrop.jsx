@@ -11,11 +11,7 @@ const DragDrop = (props) => {
     <DragDropContext onDragEnd={props.onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided, snapshot) => (
-          <div
-            className="assignment"
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
+          <div ref={provided.innerRef} {...provided.droppableProps}>
             {props.items.map((item, index) => (
               <Draggable key={index} draggableId={`${index}`} index={index}>
                 {(provided, snapshot) => (
@@ -24,7 +20,7 @@ const DragDrop = (props) => {
                       <Prompt
                         prompt={item}
                         index={index}
-                        onChangePrompt={props.onChangePrompt}
+                        onChangeValue={props.onChangeValue}
                         provided={provided}
                       />
                     )}
@@ -35,7 +31,7 @@ const DragDrop = (props) => {
                       <Confirm
                         confirm={item}
                         index={index}
-                        onChangeConfirm={props.onChangeConfirm}
+                        onChangeValue={props.onChangeValue}
                         provided={provided}
                       />
                     )}
@@ -43,7 +39,7 @@ const DragDrop = (props) => {
                       <Console
                         console={item}
                         index={index}
-                        onChangeConsoleValue={props.onChangeConsoleValue}
+                        onChangeValue={props.onChangeValue}
                         onChangeConsoleRegex={props.onChangeConsoleRegex}
                         onChangeDescription={props.onChangeDescription}
                         provided={provided}
@@ -53,7 +49,7 @@ const DragDrop = (props) => {
                       <Script
                         script={item}
                         index={index}
-                        onChangeScriptValue={props.onChangeScriptValue}
+                        onChangeValue={props.onChangeValue}
                         onChangeDescription={props.onChangeDescription}
                         provided={provided}
                       />

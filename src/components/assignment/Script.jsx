@@ -14,7 +14,7 @@ const Script = (props) => (
               type="text"
               value={props.script.value}
               onChange={(event) =>
-                props.onChangeScriptValue(props.index, event.target.value)
+                props.onChangeValue(props.index, event.target.value)
               }
             />
           </td>

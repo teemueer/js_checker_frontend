@@ -13,7 +13,7 @@ const Confirm = (props) => (
             <select
               value={props.confirm.value}
               onChange={(event) => {
-                props.onChangeConfirm(props.index, event.target.value);
+                props.onChangeValue(props.index, event.target.value);
               }}
             >
               <option value="yes">Yes</option>
