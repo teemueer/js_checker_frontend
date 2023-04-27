@@ -6,6 +6,8 @@ import Controls from "./assignment/Controls";
 import DragDrop from "./assignment/DragDrop";
 import AssgJSON from "./assignment/AssgJSON";
 
+import "../Assignment.css";
+
 const Assignment = () => {
   const navigate = useNavigate();
 
@@ -237,7 +239,7 @@ const Assignment = () => {
   if (!assg) return;
 
   return (
-    <div id="content">
+    <div className="m-3 w-1/2">
       <div id="assignment-controls">
         <Controls
           assg={assg}
