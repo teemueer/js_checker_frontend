@@ -13,6 +13,7 @@ import Assignment from "./components/Assignment";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import "./App.css";
+import Student from "./components/student/student";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -107,6 +108,7 @@ const App = () => {
         <Route path="/" element={<PublicRoute />}>
           <Route path="login" element={<Login login={login} />} />
           <Route path="register" element={<Register register={register} />} />
+          <Route path="/student/:id" element={<Student />}></Route>
         </Route>
       </Routes>
     </>
