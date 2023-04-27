@@ -13,7 +13,7 @@ import Assignment from "./components/Assignment";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import "./App.css";
-import Student from "./components/student/student";
+import Student from "./components/Student";
 
 const App = () => {
   const [user, setUser] = useState(null);

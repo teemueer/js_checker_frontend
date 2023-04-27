@@ -30,4 +30,11 @@ const remove = (assg) => {
     .catch((error) => console.error(error.message));
 };
 
-export default { getById, post, patch, remove };
+const test = async (id, url) => {
+  console.log(id, url);
+  //const response = await axios.post(`${baseUrl}/${id}`, url);
+  //console.log(response.data);
+  return res.message("allok");
+};
+
+export default { getById, post, patch, remove, test };
