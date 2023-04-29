@@ -1,11 +1,21 @@
 //To check if the URL provided by the student is valid.
 import axios from "axios";
 let baseUrl = "/api/student";
-if (process.env.NODE_ENV === "development")
+let assignmentURL = "/api/assignments";
+
+if (process.env.NODE_ENV === "development") {
   baseUrl = "http://localhost:3000" + baseUrl;
+  assignmentURL = "http://localhost:3000" + assignmentURL;
+}
 
 const getById = async (id) => {
   const res = await axios.get(`${baseUrl}/assignment/${id}`);
+  return res.data;
+};
+
+const evaluateAssg = async (id, url) => {
+  console.log("evalAssg " + id + " / " + url);
+  const res = await axios.post(`${assignmentURL}/${id}`, { url: url });
   return res.data;
 };
 
@@ -22,4 +32,4 @@ const isValidUrl = (urlString) => {
   return !!urlPattern.test(urlString);
 };
 
-export default { isValidUrl, getById };
+export default { isValidUrl, getById, evaluateAssg };
