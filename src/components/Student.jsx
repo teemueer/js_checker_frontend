@@ -42,23 +42,26 @@ const Student = () => {
     <>
       {assg && (
         <>
-          <div className="flex items-center justify-center h-screen  bg-gray-100">
-            <div className="px-8 py-6 mt-4 bg-white shadow-lg  max-w-2xl flex flex-col items-center rounded">
+          <div className="flex items-center justify-center h-screen w-screen  bg-gray-100">
+            <div className="px-8 py-6 mt-4 bg-white shadow-lg  w-[608px] min-h-[500px] max-h-[700px] flex flex-col items-center rounded">
               <h1 className="font-bold text-center text-2xl">
                 HTML & JS Checker
               </h1>
               <div className="my-2 mb-1 h-0.5 w-3/5 border-2 border-blue-500"></div>
 
-              <div className=" flex flex-col w-3/5  py-2 mb-5 items-left">
+              <div className=" flex flex-col w-3/5  py-2 mb-5 items-left min-h-[100px] min-w-[364px]">
                 <h2 className="self-center font-bold text-xl">
                   {assg.course.name}
                 </h2>
-                <div className="mt-5 mb-5 flex flex-row justify-around">
+                <div className="mt-5 flex flex-row justify-around">
                   <p>Assignment: {assg.name}</p>
                   <p>Points: {assg.points}</p>
                 </div>
-                <p>{assg.description}</p>
+                <div className="mb-1 mt-5 max-h-[120px] overflow-y-scroll">
+                  <p>{assg.description}</p>
+                </div>
               </div>
+
               <div className=" flex flex-col w-3/5 items-center">
                 {!showres && !loading && (
                   <>
