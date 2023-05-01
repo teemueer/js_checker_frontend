@@ -14,8 +14,18 @@ const getById = async (id) => {
 };
 
 const evaluateAssg = async (id, url) => {
-  console.log("evalAssg " + id + " / " + url);
   const res = await axios.post(`${assignmentURL}/${id}`, { url: url });
+  return res.data;
+};
+
+const getStudents = async () => {
+  const res = await axios.get(`${baseUrl}/`);
+  return res.data;
+};
+
+const getStudentsInCourse = async (id) => {
+  console.log(id);
+  const res = await axios.post(`${baseUrl}/test`, { id: id });
   return res.data;
 };
 
@@ -32,4 +42,10 @@ const isValidUrl = (urlString) => {
   return !!urlPattern.test(urlString);
 };
 
-export default { isValidUrl, getById, evaluateAssg };
+export default {
+  isValidUrl,
+  getById,
+  evaluateAssg,
+  getStudents,
+  getStudentsInCourse,
+};

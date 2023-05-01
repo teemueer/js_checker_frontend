@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import courseService from "../services/courses";
+import studentService from "../services/student";
 import { useMatch, Link, useNavigate } from "react-router-dom";
 
 const Course = () => {
@@ -9,10 +10,15 @@ const Course = () => {
   const courseId = match.params.id;
 
   const [course, setCourse] = useState(null);
+  const [students, setStudents] = useState(null);
 
   useEffect(() => {
     courseService.getById(courseId).then((course) => {
       setCourse(course);
+    });
+    studentService.getStudentsInCourse(courseId).then((students) => {
+      setStudents(students);
+      console.log(students);
     });
   }, [courseId]);
 
