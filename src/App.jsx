@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, Outlet, useNavigate } from "react-router-dom";
 import loginService from "./services/login";
 import usersService from "./services/users";
-import courseService from "./services/courses";
+
 import assignmentService from "./services/assignments";
 import Navigation from "./components/Navigation";
 import Courses from "./components/Courses";
@@ -14,6 +14,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import "./App.css";
 import Student from "./components/Student";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -38,6 +41,7 @@ const App = () => {
       setUser(user);
       loginService.setToken(user.token);
     } catch (exception) {
+      toast.error("Login failed");
       console.error(exception);
     }
   };
@@ -46,6 +50,7 @@ const App = () => {
     loginService.logout();
     setUser(null);
     window.localStorage.removeItem("loggedInUser");
+    toast("Logged out");
   };
 
   const register = async (credentials) => {
@@ -53,27 +58,7 @@ const App = () => {
       await usersService.register(credentials);
       navigate("/login");
     } catch (exception) {
-      console.error(exception);
-    }
-  };
-
-  const createCourse = async (course) => {
-    try {
-      const newCourse = await courseService.postCourse(course);
-      navigate(`/courses/${newCourse._id}`);
-    } catch (exception) {
-      console.error(exception);
-    }
-  };
-
-  const createAssignment = async (courseId, assignment) => {
-    try {
-      const newAssignment = await courseService.postAssignment(
-        courseId,
-        assignment
-      );
-      navigate(`/assignments/${newAssignment._id}`);
-    } catch (exception) {
+      toast.error("Registration failed");
       console.error(exception);
     }
   };
@@ -90,25 +75,34 @@ const App = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+      />
+
       {user && <Navigation user={user} logout={logout} />}
       <Routes>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="" element={<Courses />} />
-          <Route
-            path="new-course"
-            element={<NewCourse createCourse={createCourse} />}
-          />
+          <Route path="new-course" element={<NewCourse />} />
           <Route path="courses/:id" element={<Course />} />
           <Route
             path="courses/:id/new-assignment"
-            element={<NewAssignment createAssignment={createAssignment} />}
+            element={<NewAssignment />}
           />
           <Route path="assignments/:id" element={<Assignment />} />
         </Route>
         <Route path="/" element={<PublicRoute />}>
           <Route path="login" element={<Login login={login} />} />
           <Route path="register" element={<Register register={register} />} />
-          <Route path="/student/:id" element={<Student />}></Route>
+          <Route path="/student/:id" element={<Student />} />
         </Route>
       </Routes>
     </>

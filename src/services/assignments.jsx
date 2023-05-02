@@ -16,18 +16,13 @@ const post = async (assignment) => {
   return res.data;
 };
 
-const patch = (assg) => {
-  axios
-    .patch(`${baseUrl}/${assg._id}`, assg, { headers })
-    .then((res) => console.log("Patched assignment"))
-    .catch((error) => console.error(error.message));
+const patch = async (assg) => {
+  const res = await axios.patch(`${baseUrl}/${assg._id}`, assg, { headers });
+  return res.data;
 };
 
-const remove = (assg) => {
-  axios
-    .delete(`${baseUrl}/${assg._id}`, { headers })
-    .then((res) => console.log("Removed assignment"))
-    .catch((error) => console.error(error.message));
+const remove = async (assg) => {
+  axios.delete(`${baseUrl}/${assg._id}`, { headers });
 };
 
 const test = async (id, url) => {

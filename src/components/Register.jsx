@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = ({ register }) => {
   const [username, setUsername] = useState("");
@@ -13,6 +14,9 @@ const Register = ({ register }) => {
       setUsername("");
       setPassword1("");
       setPassword2("");
+      toast.success("Registration successful");
+    } else {
+      toast.error("Passwords don't match");
     }
   };
 
@@ -60,7 +64,7 @@ const Register = ({ register }) => {
             <div className="flex items-baseline justify-between">
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="m-3 w-full text-white bg-green-600 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Register
               </button>

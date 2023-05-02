@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import courseService from "../services/courses";
 import { Link } from "react-router-dom";
 
 const Courses = ({ user }) => {
+  const navigate = useNavigate();
+
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     courseService.get().then((courses) => setCourses(courses));
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="m-4 w-1/2">

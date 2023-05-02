@@ -7,6 +7,7 @@ import DragDrop from "./assignment/DragDrop";
 import AssgJSON from "./assignment/AssgJSON";
 
 import "../Assignment.css";
+import { toast } from "react-toastify";
 
 const Assignment = () => {
   const navigate = useNavigate();
@@ -37,24 +38,38 @@ const Assignment = () => {
     setAssg(newAssg);
   };
 
-  const onSaveAssg = () => {
+  const onSaveAssg = async () => {
     console.log("onSaveAssg");
-    if (assg._id) {
-      assignmentService.patch(assg);
-    } else {
-      assignmentService.post(assg).then((savedAssg) => {
+    try {
+      if (assg._id) {
+        await assignmentService.patch(assg);
+      } else {
+        const savedAssg = await assignmentService.post(assg);
         const newAssg = { ...assg };
         newAssg._id = savedAssg._id;
         setAssg(newAssg);
-      });
+      }
+      toast.success("Assignment saved");
+    } catch (exception) {
+      toast.error("Assignment saving failed");
+      console.error(exception);
     }
   };
 
-  const onDeleteAssg = () => {
+  const onCopyAssg = () => {
+    console.log("onCopyAssg", window.location);
+    const host = window.location.host;
+    const studentUrl = `${host}/student/${assgId}`;
+    navigator.clipboard.writeText(studentUrl);
+    toast.info("URL copied");
+  };
+
+  const onDeleteAssg = async () => {
     console.log("onDeleteAssg");
     if (confirm(`Delete assignment '${assg.name}'?`) === true) {
-      assignmentService.remove(assg);
+      await assignmentService.remove(assg);
       navigate("/");
+      toast.success("Assignment deleted");
     }
   };
 
@@ -252,11 +267,11 @@ const Assignment = () => {
           onAddConsole={onAddConsole}
           onAddScriptCheck={onAddScriptCheck}
           onSave={onSaveAssg}
+          onCopy={onCopyAssg}
           onDelete={onDeleteAssg}
         />
       </div>
-
-      <div id="assignment-items">
+      <div id="assignment-items" className="mb-[100px]">
         {assg.items.length > 0 && (
           <DragDrop
             items={assg.items}
