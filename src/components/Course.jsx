@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import courseService from "../services/courses";
 import studentService from "../services/student";
 import { useMatch, Link, useNavigate } from "react-router-dom";
+import StudentModal from "./studentComponents/studentModal";
 
 const Course = () => {
   const navigate = useNavigate();
@@ -11,6 +12,9 @@ const Course = () => {
 
   const [course, setCourse] = useState(null);
   const [students, setStudents] = useState(null);
+  const [search, setSearch] = useState();
+  const [modalStudent, setModalStudent] = useState();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     courseService.getById(courseId).then((course) => {
@@ -30,7 +34,12 @@ const Course = () => {
     }
   };
 
+  const onSearch = (search) => {
+    setSearch(search);
+  };
+
   if (!course) return;
+  if (!students) return;
 
   return (
     <>
@@ -89,7 +98,79 @@ const Course = () => {
         </div>
         <div className="m-4 w-1/2">
           <h2 className="mb-4 text-2xl font-bold">Students</h2>
+          <form className="max-w-sm px-4 pl-0 mb-2">
+            <div className="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search"
+                onChange={(event) => onSearch(event.target.value)}
+                className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
+              />
+            </div>
+          </form>
+          <div>
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Username
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    completed
+                  </th>
+                  <th scope="col" className="px-6 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {students.map((student) => (
+                  <tr
+                    key={student._id}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      <p>{student.username}</p>
+                    </td>
+                    <td className="px-6 py-4">
+                      {student.results.length} / {course.assignments.length}
+                    </td>
+                    <td className="px-6 py-4">
+                      <button
+                        onClick={() => {
+                          setShow(true), setModalStudent(student);
+                        }}
+                      >
+                        Details
+                      </button>
+                    </td>
+                  </tr>
+                  //Send current student to StudentModal
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
+        <StudentModal
+          student={modalStudent}
+          show={show}
+          onClose={() => setShow(false)}
+        />
       </div>
     </>
   );
