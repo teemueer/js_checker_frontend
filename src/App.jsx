@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, Outlet, useNavigate } from "react-router-dom";
 import loginService from "./services/login";
-import usersService from "./services/users";
-
-import assignmentService from "./services/assignments";
 import Navigation from "./components/Navigation";
 import Courses from "./components/Courses";
 import NewCourse from "./components/NewCourse";
@@ -18,11 +15,14 @@ import Student from "./components/Student";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { useTranslation } from "react-i18next";
+
 const App = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation("common");
 
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem("loggedInUser");
@@ -40,8 +40,9 @@ const App = () => {
       window.localStorage.setItem("loggedInUser", JSON.stringify(user));
       setUser(user);
       loginService.setToken(user.token);
+      toast.success(t("toasts.login.success"));
     } catch (exception) {
-      toast.error("Login failed");
+      toast.error(t("toasts.login.error"));
       console.error(exception);
     }
   };
@@ -50,17 +51,7 @@ const App = () => {
     loginService.logout();
     setUser(null);
     window.localStorage.removeItem("loggedInUser");
-    toast("Logged out");
-  };
-
-  const register = async (credentials) => {
-    try {
-      await usersService.register(credentials);
-      navigate("/login");
-    } catch (exception) {
-      toast.error("Registration failed");
-      console.error(exception);
-    }
+    toast(t("toasts.logout.success"));
   };
 
   const PrivateRoute = () => {
@@ -101,7 +92,7 @@ const App = () => {
         </Route>
         <Route path="/" element={<PublicRoute />}>
           <Route path="login" element={<Login login={login} />} />
-          <Route path="register" element={<Register register={register} />} />
+          <Route path="register" element={<Register />} />
           <Route path="/student/:id" element={<Student />} />
         </Route>
       </Routes>

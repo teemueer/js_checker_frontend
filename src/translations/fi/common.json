@@ -94,5 +94,31 @@
         "name": "Nimi",
         "description": "Kuvaus",
         "create": "Luo"
+    },
+    "toasts": {
+        "login": {
+            "success": "Sisäänkirjautuminen onnistui",
+            "error": "Sisäänkirjautuminen epäonnistui"
+        },
+        "logout": {
+            "success": "Uloskirjautuminen onnistui"
+        },
+        "register": {
+            "success": "Tunnuksen luonti onnistui",
+            "error": "Tunnuksen luonti epäonnistui",
+            "password": "Salasanat eivät täsmää"
+        },
+        "course": {
+            "create": "Uusi kurssi luotu",
+            "delete": "Kurssi poistettu",
+            "error": "Virhe"
+        },
+        "assignment": {
+            "create": "Uusi tehtävä luotu",
+            "delete": "Tehtävä poistettu",
+            "save": "Tehtävä tallennettu",
+            "copy": "Osoite kopioitu",
+            "error": "Virhe"
+        }
     }
 }

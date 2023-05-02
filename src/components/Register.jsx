@@ -1,25 +1,33 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import usersService from "../services/users";
 
-const Register = ({ register }) => {
+const Register = () => {
+  const navigate = useNavigate();
   const [t, i18n] = useTranslation("common");
 
   const [username, setUsername] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (password1 === password2) {
-      register({ username, password: password1 });
-      setUsername("");
-      setPassword1("");
-      setPassword2("");
-      toast.success("Registration successful");
+      try {
+        await usersService.register({ username, password: password1 });
+        navigate("/login");
+        toast.success(t("toasts.register.success"));
+        setUsername("");
+        setPassword1("");
+        setPassword2("");
+      } catch (exception) {
+        console.error(exception);
+        toast.error(t("toasts.register.error"));
+      }
     } else {
-      toast.error("Passwords don't match");
+      toast.error(t("toasts.register.password"));
     }
   };
 

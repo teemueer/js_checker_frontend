@@ -52,9 +52,9 @@ const Assignment = () => {
         newAssg._id = savedAssg._id;
         setAssg(newAssg);
       }
-      toast.success("Assignment saved");
+      toast.success(t("toasts.assignment.save"));
     } catch (exception) {
-      toast.error("Assignment saving failed");
+      toast.error(t("toasts.assignment.error"));
       console.error(exception);
     }
   };
@@ -64,15 +64,19 @@ const Assignment = () => {
     const host = window.location.host;
     const studentUrl = `${host}/student/${assgId}`;
     navigator.clipboard.writeText(studentUrl);
-    toast.info("URL copied");
+    toast.info(t("toasts.assignment.copy"));
   };
 
   const onDeleteAssg = async () => {
     console.log("onDeleteAssg");
     if (confirm(`Delete assignment '${assg.name}'?`) === true) {
-      await assignmentService.remove(assg);
-      navigate("/");
-      toast.success("Assignment deleted");
+      try {
+        await assignmentService.remove(assg);
+        navigate("/");
+        toast.success(t("toasts.assignment.delete"));
+      } catch (exception) {
+        toast.error(t("toasts.assignment.error"));
+      }
     }
   };
 
