@@ -50,7 +50,10 @@ const Element = (props) => (
         <tr>
           <td>Attributes:</td>
           <td colSpan="4">
-            <button onClick={() => props.onAddElementAttribute(props.index)}>
+            <button
+              onClick={() => props.onAddElementAttribute(props.index)}
+              className="bg-gray-200 rounded-md p-1 inline-flex items-center justify-center hover:bg-gray-300 w-6 h-6"
+            >
               +
             </button>
           </td>
@@ -105,6 +108,7 @@ const Element = (props) => (
                 onClick={(event) =>
                   props.onRemoveElementAttribute(props.index, index)
                 }
+                className="bg-gray-200 rounded-md p-1 inline-flex items-center justify-center hover:bg-gray-300 w-6 h-6"
               >
                 x
               </button>
@@ -114,7 +118,10 @@ const Element = (props) => (
         <tr>
           <td>Texts:</td>
           <td colSpan="4">
-            <button onClick={() => props.onAddElementText(props.index)}>
+            <button
+              onClick={() => props.onAddElementText(props.index)}
+              className="bg-gray-200 rounded-md p-1 inline-flex items-center justify-center hover:bg-gray-300 w-6 h-6"
+            >
               +
             </button>
           </td>
@@ -152,6 +159,7 @@ const Element = (props) => (
                 onClick={(event) =>
                   props.onRemoveElementText(props.index, index)
                 }
+                className="bg-gray-200 rounded-md p-1 inline-flex items-center justify-center hover:bg-gray-300 w-6 h-6"
               >
                 x
               </button>

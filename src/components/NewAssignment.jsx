@@ -1,19 +1,32 @@
 import { useState } from "react";
-import { useMatch } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
+import courseService from "../services/courses";
+import { toast } from "react-toastify";
 
-const NewAssignment = ({ createAssignment }) => {
+const NewAssignment = () => {
+  const navigate = useNavigate();
+
   const match = useMatch("/courses/:id/new-assignment");
   const courseId = match.params.id;
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [points, setPoints] = useState(0);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    createAssignment(courseId, { name, description, points });
-    setName("");
-    setDescription("");
+    try {
+      const newAssignment = await courseService.postAssignment(courseId, {
+        name,
+        description,
+      });
+      setName("");
+      setDescription("");
+      navigate(`/assignments/${newAssignment._id}`);
+      toast.success("New assignment created");
+    } catch (exception) {
+      toast.error("Assignment creation failed");
+      console.error(exception);
+    }
   };
 
   return (

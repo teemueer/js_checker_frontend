@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import courseService from "../services/courses";
+import studentService from "../services/student";
 import { useMatch, Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Course = () => {
   const navigate = useNavigate();
@@ -9,11 +11,18 @@ const Course = () => {
   const courseId = match.params.id;
 
   const [course, setCourse] = useState(null);
+  const [students, setStudents] = useState(null);
 
   useEffect(() => {
     courseService.getById(courseId).then((course) => {
       setCourse(course);
     });
+    /*
+    studentService.getStudentsInCourse(courseId).then((students) => {
+      setStudents(students);
+      console.log(students);
+    });
+    */
   }, [courseId]);
 
   const onDelete = () => {
@@ -21,6 +30,7 @@ const Course = () => {
     if (confirm(`Delete course '${course.name}'?`) === true) {
       courseService.remove(course);
       navigate("/");
+      toast.success("Course deleted");
     }
   };
 

@@ -1,14 +1,25 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import courseService from "../services/courses";
+import { toast } from "react-toastify";
 
-const NewCourse = ({ createCourse }) => {
+const NewCourse = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    createCourse({ name, description });
-    setName("");
-    setDescription("");
+    try {
+      const newCourse = await courseService.postCourse({ name, description });
+      navigate(`/courses/${newCourse._id}`);
+      setName("");
+      setDescription("");
+      toast.success("New course created");
+    } catch (exception) {
+      console.error(exception);
+    }
   };
 
   return (

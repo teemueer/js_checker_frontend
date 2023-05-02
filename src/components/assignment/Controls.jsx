@@ -14,7 +14,7 @@ const Controls = (props) => (
           id="assignment-points"
           type="number"
           min="0"
-          value={props.assg.points}
+          value={props.assg.points || 0}
           onChange={(event) => props.onChangeAssgPoints(event.target.value)}
           className="px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
         />
@@ -27,6 +27,12 @@ const Controls = (props) => (
           Save
         </button>
         <button
+          onClick={props.onCopy}
+          className="mr-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-3 border border-gray-400 rounded shadow"
+        >
+          Copy url
+        </button>
+        <button
           onClick={props.onDelete}
           className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 border border-gray-400 rounded shadow"
         >
@@ -35,41 +41,41 @@ const Controls = (props) => (
       </span>
     </div>
 
-    <div className="m-3">
+    <div className="mt-3 p-3 bottom-0 fixed bg-white w-full">
       <span id="new-buttons">
         <button
           onClick={props.onAddPrompt}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+          className="bg-white hover:bg-gray-300 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
         >
           New prompt
         </button>
         <button
           onClick={props.onAddElement}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+          className="bg-white hover:bg-gray-300 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
         >
           New element
         </button>
         <button
           onClick={props.onAddReload}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+          className="bg-white hover:bg-gray-300 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
         >
           New reload
         </button>
         <button
           onClick={props.onAddConfirm}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+          className="bg-white hover:bg-gray-300 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
         >
           New confirm
         </button>
         <button
           onClick={props.onAddConsole}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+          className="bg-white hover:bg-gray-300 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
         >
           New console
         </button>
         <button
           onClick={props.onAddScriptCheck}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
+          className="bg-white hover:bg-gray-300 text-gray-800 font-semibold px-2 border border-gray-400 rounded shadow"
         >
           New script check
         </button>
