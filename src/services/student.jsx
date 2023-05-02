@@ -24,7 +24,6 @@ const getStudents = async () => {
 };
 
 const getStudentsInCourse = async (id) => {
-  console.log(id);
   const res = await axios.post(`${baseUrl}/test`, { id: id });
   return res.data;
 };
