@@ -11,8 +11,8 @@ const Course = () => {
   const courseId = match.params.id;
 
   const [course, setCourse] = useState(null);
-  const [students, setStudents] = useState(null);
-  const [search, setSearch] = useState();
+  const [students, setStudents] = useState([]);
+  const [search, setSearch] = useState("");
   const [modalStudent, setModalStudent] = useState();
   const [show, setShow] = useState(false);
 
@@ -38,8 +38,11 @@ const Course = () => {
     setSearch(search);
   };
 
+  const searchStudents = students.filter((student) => {
+    return student.username.toLowerCase().includes(search.toLowerCase());
+  });
+
   if (!course) return;
-  if (!students) return;
 
   return (
     <>
@@ -118,6 +121,7 @@ const Course = () => {
                 type="text"
                 placeholder="Search"
                 onChange={(event) => onSearch(event.target.value)}
+                value={search}
                 className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
               />
             </div>
@@ -136,7 +140,7 @@ const Course = () => {
                 </tr>
               </thead>
               <tbody>
-                {students.map((student) => (
+                {searchStudents.map((student) => (
                   <tr
                     key={student._id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -155,6 +159,7 @@ const Course = () => {
                         onClick={() => {
                           setShow(true), setModalStudent(student);
                         }}
+                        className="text-blue-500"
                       >
                         Details
                       </button>
