@@ -1,24 +1,39 @@
 import { useState } from "react";
-import { useMatch } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
+import courseService from "../services/courses";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
-const NewAssignment = ({ createAssignment }) => {
+const NewAssignment = () => {
+  const navigate = useNavigate();
+  const [t, i18n] = useTranslation("common");
+
   const match = useMatch("/courses/:id/new-assignment");
   const courseId = match.params.id;
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [points, setPoints] = useState(0);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    createAssignment(courseId, { name, description, points });
-    setName("");
-    setDescription("");
+    try {
+      const newAssignment = await courseService.postAssignment(courseId, {
+        name,
+        description,
+      });
+      setName("");
+      setDescription("");
+      navigate(`/assignments/${newAssignment._id}`);
+      toast.success(t("toasts.assignment.create"));
+    } catch (exception) {
+      toast.error(t("toasts.assignment.error"));
+      console.error(exception);
+    }
   };
 
   return (
     <div className="m-4 w-1/2">
-      <h2 className="mb-4 text-2xl font-bold">New assignment</h2>
+      <h2 className="mb-4 text-2xl font-bold">{t("new_assignment.title")}</h2>
       <form onSubmit={handleSubmit}>
         <div className="">
           <div className="mt-3">
@@ -26,7 +41,7 @@ const NewAssignment = ({ createAssignment }) => {
               htmlFor="name"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Name
+              {t("new_assignment.name")}
             </label>
             <input
               id="name"
@@ -40,7 +55,7 @@ const NewAssignment = ({ createAssignment }) => {
               htmlFor="description"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Description
+              {t("new_assignment.description")}
             </label>
             <textarea
               id="description"
@@ -56,7 +71,7 @@ const NewAssignment = ({ createAssignment }) => {
             type="submit"
             className="mt-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           >
-            Create
+            {t("new_assignment.create")}
           </button>
         </div>
       </form>

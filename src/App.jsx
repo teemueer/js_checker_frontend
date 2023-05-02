@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, Outlet, useNavigate } from "react-router-dom";
 import loginService from "./services/login";
-import usersService from "./services/users";
-import courseService from "./services/courses";
-import assignmentService from "./services/assignments";
 import Navigation from "./components/Navigation";
 import Courses from "./components/Courses";
 import NewCourse from "./components/NewCourse";
@@ -15,11 +12,17 @@ import Register from "./components/Register";
 import "./App.css";
 import Student from "./components/Student";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { useTranslation } from "react-i18next";
+
 const App = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation("common");
 
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem("loggedInUser");
@@ -37,7 +40,9 @@ const App = () => {
       window.localStorage.setItem("loggedInUser", JSON.stringify(user));
       setUser(user);
       loginService.setToken(user.token);
+      toast.success(t("toasts.login.success"));
     } catch (exception) {
+      toast.error(t("toasts.login.error"));
       console.error(exception);
     }
   };
@@ -46,36 +51,7 @@ const App = () => {
     loginService.logout();
     setUser(null);
     window.localStorage.removeItem("loggedInUser");
-  };
-
-  const register = async (credentials) => {
-    try {
-      await usersService.register(credentials);
-      navigate("/login");
-    } catch (exception) {
-      console.error(exception);
-    }
-  };
-
-  const createCourse = async (course) => {
-    try {
-      const newCourse = await courseService.postCourse(course);
-      navigate(`/courses/${newCourse._id}`);
-    } catch (exception) {
-      console.error(exception);
-    }
-  };
-
-  const createAssignment = async (courseId, assignment) => {
-    try {
-      const newAssignment = await courseService.postAssignment(
-        courseId,
-        assignment
-      );
-      navigate(`/assignments/${newAssignment._id}`);
-    } catch (exception) {
-      console.error(exception);
-    }
+    toast(t("toasts.logout.success"));
   };
 
   const PrivateRoute = () => {
@@ -90,25 +66,34 @@ const App = () => {
 
   return (
     <>
-      {user && <Navigation user={user} logout={logout} />}
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+      />
+
+      <Navigation user={user} logout={logout} />
       <Routes>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="" element={<Courses />} />
-          <Route
-            path="new-course"
-            element={<NewCourse createCourse={createCourse} />}
-          />
+          <Route path="new-course" element={<NewCourse />} />
           <Route path="courses/:id" element={<Course />} />
           <Route
             path="courses/:id/new-assignment"
-            element={<NewAssignment createAssignment={createAssignment} />}
+            element={<NewAssignment />}
           />
           <Route path="assignments/:id" element={<Assignment />} />
         </Route>
         <Route path="/" element={<PublicRoute />}>
           <Route path="login" element={<Login login={login} />} />
-          <Route path="register" element={<Register register={register} />} />
-          <Route path="/student/:id" element={<Student />}></Route>
+          <Route path="register" element={<Register />} />
+          <Route path="/student/:id" element={<Student />} />
         </Route>
       </Routes>
     </>

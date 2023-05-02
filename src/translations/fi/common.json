@@ -1,0 +1,124 @@
+{
+    "navigation": {
+        "logout": "Kirjaudu ulos"
+    },
+    "login": {
+        "title": "Kirjaudu sisään",
+        "username": "Käyttäjätunnus",
+        "password": "Salasana",
+        "login": "Kirjaudu",
+        "create_new": "Luo uusi tunnus"
+    },
+    "register": {
+        "title": "Luo tunnus",
+        "username": "Käyttäjätunnus",
+        "password1": "Salasana",
+        "password2": "Varmista salasana",
+        "register": "Luo tunnus",
+        "already_account": "Omistatko jo tunnuksen?",
+        "login": "Kirjaudu sisään"
+    },
+    "courses": {
+        "title": "Minun kurssini",
+        "course": {
+            "name": "Nimi",
+            "assignments": "Tehtävät",
+            "description": "Kuvaus"
+        },
+        "new": "+ Uusi kurssi"
+    },
+    "course": {
+        "new_assignment": "+ Uusi tehtävä",
+        "delete": "Poista kurssi",
+        "assignment": {
+            "name": "Nimi",
+            "points": "Pisteet",
+            "description": "Kuvaus"
+        }
+    },
+    "assignment": {
+        "controls": {
+            "name": "Tehtävän nimi: ",
+            "points": "Pisteet: ",
+            "save": "Tallenna",
+            "copy": "Kopioi osoite",
+            "delete": "Poista",
+            "new_element": "<Element />",
+            "new_prompt": "prompt()",
+            "new_reload": "reload()",
+            "new_confirm": "confirm()",
+            "new_console": "console()",
+            "new_script": "<script />"
+        },
+        "element": {
+            "name": "CSS polku:",
+            "input": "Syöte:",
+            "action": "Toimenpide:",
+            "attributes": "Attribuutit:",
+            "texts": "InnerHTML:",
+            "description": "Kuvaus:",
+            "actions": {
+                "click": "Klikkaus",
+                "enter": "Enter",
+                "hover": "Hover"
+            }
+        },
+        "confirm": {
+            "confirm": "confirm():",
+            "yes": "Kyllä",
+            "no": "Ei"
+        },
+        "console": {
+            "console": "Konsoli sisältää:",
+            "description": "Kuvaus:"
+        },
+        "prompt": {
+            "prompt": "Syötä kehotteeseen:"
+        },
+        "reload": {
+            "reload": "Päivitä sivu"
+        },
+        "script": {
+            "script": "Skripti sisältää:",
+            "description": "Kuvaus:"
+        }
+    },
+    "new_course": {
+        "title": "Uusi kurssi",
+        "name": "Nimi",
+        "description": "Kuvaus",
+        "create": "Luo"
+    },
+    "new_assignment": {
+        "title": "Uusi tehtävä",
+        "name": "Nimi",
+        "description": "Kuvaus",
+        "create": "Luo"
+    },
+    "toasts": {
+        "login": {
+            "success": "Sisäänkirjautuminen onnistui",
+            "error": "Sisäänkirjautuminen epäonnistui"
+        },
+        "logout": {
+            "success": "Uloskirjautuminen onnistui"
+        },
+        "register": {
+            "success": "Tunnuksen luonti onnistui",
+            "error": "Tunnuksen luonti epäonnistui",
+            "password": "Salasanat eivät täsmää"
+        },
+        "course": {
+            "create": "Uusi kurssi luotu",
+            "delete": "Kurssi poistettu",
+            "error": "Virhe"
+        },
+        "assignment": {
+            "create": "Uusi tehtävä luotu",
+            "delete": "Tehtävä poistettu",
+            "save": "Tehtävä tallennettu",
+            "copy": "Osoite kopioitu",
+            "error": "Virhe"
+        }
+    }
+}
