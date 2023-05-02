@@ -24,9 +24,9 @@ const NewAssignment = () => {
       setName("");
       setDescription("");
       navigate(`/assignments/${newAssignment._id}`);
-      toast.success("New assignment created");
+      toast.success(t("toasts.assignment.create"));
     } catch (exception) {
-      toast.error("Assignment creation failed");
+      toast.error(t("toasts.assignment.error"));
       console.error(exception);
     }
   };

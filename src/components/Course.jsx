@@ -27,12 +27,16 @@ const Course = () => {
     */
   }, [courseId]);
 
-  const onDelete = () => {
+  const onDelete = async () => {
     console.log("onDelete");
     if (confirm(`Delete course '${course.name}'?`) === true) {
-      courseService.remove(course);
-      navigate("/");
-      toast.success("Course deleted");
+      try {
+        await courseService.remove(course);
+        navigate("/");
+        toast.success(t("toasts.course.delete"));
+      } catch (exception) {
+        toast.error(t("toasts.course.error"));
+      }
     }
   };
 

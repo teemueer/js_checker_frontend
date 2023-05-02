@@ -18,9 +18,10 @@ const NewCourse = () => {
       navigate(`/courses/${newCourse._id}`);
       setName("");
       setDescription("");
-      toast.success("New course created");
+      toast.success(t("toasts.course.create"));
     } catch (exception) {
       console.error(exception);
+      toast.error(t("toasts.course.error"));
     }
   };
 

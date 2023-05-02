@@ -94,5 +94,31 @@
         "name": "Name",
         "description": "Description",
         "create": "Create"
+    },
+    "toasts": {
+        "login": {
+            "success": "Logged in",
+            "error": "Couldn't log in"
+        },
+        "logout": {
+            "success": "Logged out"
+        },
+        "register": {
+            "success": "Registration succeeded",
+            "error": "Registration failed",
+            "password": "Passwords don't match"
+        },
+        "course": {
+            "create": "Course created",
+            "delete": "Course deleted",
+            "error": "Error"
+        },
+        "assignment": {
+            "create": "Assignment created",
+            "delete": "Assignment deleted",
+            "save": "Assignment saved",
+            "copy": "URL copied",
+            "error": "Error"
+        }
     }
 }
