@@ -89,9 +89,9 @@ const Student = () => {
                     <div className="">
                       {res.length != 0 && (
                         <>
-                          {res.map((item) => (
+                          {res.map((item, index) => (
                             <>
-                              <div className="flex flex-row">
+                              <div className="flex flex-row" key={index}>
                                 <p>{item.description}: </p>
                                 <p className="ml-2 text-bold text-red-500">
                                   {item.result}

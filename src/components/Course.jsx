@@ -168,6 +168,7 @@ const Course = () => {
         </div>
         <StudentModal
           student={modalStudent}
+          course={course}
           show={show}
           onClose={() => setShow(false)}
         />
