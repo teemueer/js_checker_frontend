@@ -1,0 +1,98 @@
+{
+    "navigation": {
+        "logout": "Logout"
+    },
+    "login": {
+        "title": "Login",
+        "username": "Username",
+        "password": "Password",
+        "login": "Login",
+        "create_new": "Create a new account"
+    },
+    "register": {
+        "title": "Register",
+        "username": "Username",
+        "password1": "Password",
+        "password2": "Confirm password",
+        "register": "Register",
+        "already_account": "Already have an account?",
+        "login": "Login"
+    },
+    "courses": {
+        "title": "My courses",
+        "course": {
+            "name": "Name",
+            "assignments": "Assignments",
+            "description": "Description"
+        },
+        "new": "+ New course"
+    },
+    "course": {
+        "new_assignment": "+ New assignment",
+        "delete": "Delete course",
+        "assignment": {
+            "name": "Name",
+            "points": "Points",
+            "description": "Description"
+        }
+    },
+    "assignment": {
+        "controls": {
+            "name": "Assignment name: ",
+            "points": "Points: ",
+            "save": "Save",
+            "copy": "Copy URL",
+            "delete": "Delete",
+            "new_element": "<Element />",
+            "new_prompt": "prompt()",
+            "new_reload": "reload()",
+            "new_confirm": "confirm()",
+            "new_console": "console()",
+            "new_script": "<script />"
+        },
+        "element": {
+            "name": "CSS path:",
+            "input": "Input:",
+            "action": "Action:",
+            "attributes": "Attributes:",
+            "texts": "InnerHTML:",
+            "description": "Description:",
+            "actions": {
+                "click": "Click",
+                "enter": "Enter",
+                "hover": "Hover"
+            }
+        },
+        "confirm": {
+            "confirm": "confirm():",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "console": {
+            "console": "Console contains:",
+            "description": "Description:"
+        },
+        "prompt": {
+            "prompt": "Enter into prompt:"
+        },
+        "reload": {
+            "reload": "Reload site"
+        },
+        "script": {
+            "script": "Script contains:",
+            "description": "Description:"
+        }
+    },
+    "new_course": {
+        "title": "New course",
+        "name": "Name",
+        "description": "Description",
+        "create": "Create"
+    },
+    "new_assignment": {
+        "title": "New assignment",
+        "name": "Name",
+        "description": "Description",
+        "create": "Create"
+    }
+}

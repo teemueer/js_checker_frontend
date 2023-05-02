@@ -6,11 +6,14 @@ import Controls from "./assignment/Controls";
 import DragDrop from "./assignment/DragDrop";
 import AssgJSON from "./assignment/AssgJSON";
 
+import { useTranslation } from "react-i18next";
+
 import "../Assignment.css";
 import { toast } from "react-toastify";
 
 const Assignment = () => {
   const navigate = useNavigate();
+  const [t, i18n] = useTranslation("common");
 
   const match = useMatch("/assignments/:id");
   const assgId = match.params.id;

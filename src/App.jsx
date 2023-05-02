@@ -87,7 +87,7 @@ const App = () => {
         pauseOnHover={false}
       />
 
-      {user && <Navigation user={user} logout={logout} />}
+      <Navigation user={user} logout={logout} />
       <Routes>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="" element={<Courses />} />
