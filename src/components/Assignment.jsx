@@ -261,7 +261,7 @@ const Assignment = () => {
   if (!assg) return;
 
   return (
-    <div className="m-3 w-1/2">
+    <div className="m-3">
       <div id="assignment-controls">
         <Controls
           assg={assg}
@@ -278,8 +278,9 @@ const Assignment = () => {
           onDelete={onDeleteAssg}
         />
       </div>
-      <div id="assignment-items" className="mb-[100px]">
-        {assg.items.length > 0 && (
+
+      {assg.items.length > 0 && (
+        <div id="assignment-items" className="mb-[100px]">
           <DragDrop
             items={assg.items}
             onChangeValue={onChangeValue}
@@ -300,8 +301,8 @@ const Assignment = () => {
             onChangeDescription={onChangeDescription}
             onDragEnd={onDragEnd}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

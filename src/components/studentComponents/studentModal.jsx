@@ -12,6 +12,7 @@ const StudentModal = (props) => {
     return sum;
   };
 
+  /*
   let temp = [];
 
   for (let i = 0; i < props.course.assignments.length; i++) {
@@ -29,6 +30,7 @@ const StudentModal = (props) => {
   }
 
   console.log(temp);
+  */
 
   if (!props.student) return;
 
@@ -79,13 +81,13 @@ const StudentModal = (props) => {
                 </tr>
               </thead>
               <tbody className="overflow-y-scroll">
-                {temp.map((result) => (
-                  <tr key={result._id}>
+                {props.student.results.map((result) => (
+                  <tr key={result.id}>
                     <td
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                      {result.name}
+                      {result.assignment}
                     </td>
                     <td className="px-6 py-4">{result.attempts}</td>
                     <td className="px-6 py-4">
