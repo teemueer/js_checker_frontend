@@ -22,13 +22,11 @@ const Course = () => {
   useEffect(() => {
     courseService.getById(courseId).then((course) => {
       setCourse(course);
+      console.log(course);
     });
-    /*
     studentService.getStudentsInCourse(courseId).then((students) => {
       setStudents(students);
-      console.log(students);
     });
-    */
   }, [courseId]);
 
   const onDelete = async () => {
@@ -57,44 +55,44 @@ const Course = () => {
   return (
     <>
       <div className="w-screen flex flex-row">
-    <div className="m-4 w-1/2">
-      <h2 className="mb-4 text-2xl font-bold">{course.name}</h2>
-      <p>{course.description}</p>
+        <div className="m-4 w-1/2">
+          <h2 className="mb-4 text-2xl font-bold">{course.name}</h2>
+          <p>{course.description}</p>
 
-      <div>
-        <Link to={`/courses/${courseId}/new-assignment`}>
-          <button className="m-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-            {t("course.new_assignment")}
-          </button>
-        </Link>
-        <button
-          onClick={onDelete}
-          className="m-2 bg-red-400 hover:bg-red-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-        >
-          {t("course.delete")}
-        </button>
-      </div>
+          <div>
+            <Link to={`/courses/${courseId}/new-assignment`}>
+              <button className="m-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                {t("course.new_assignment")}
+              </button>
+            </Link>
+            <button
+              onClick={onDelete}
+              className="m-2 bg-red-400 hover:bg-red-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              {t("course.delete")}
+            </button>
+          </div>
 
-      <div className="relative overflow-x-auto">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                {t("course.assignment.name")}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t("course.assignment.points")}
-              </th>
-              <th scope="col" className="px-6 py-3">
-                {t("course.assignment.description")}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {course.assignments.map((assg) => (
-              <tr
-                key={assg._id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+          <div className="relative overflow-x-auto">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    {t("course.assignment.name")}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t("course.assignment.points")}
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    {t("course.assignment.description")}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {course.assignments.map((assg) => (
+                  <tr
+                    key={assg._id}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
                     <td
                       scope="row"
@@ -111,7 +109,7 @@ const Course = () => {
           </div>
         </div>
         <div className="m-4 w-1/2">
-          <h2 className="mb-4 text-2xl font-bold">Students</h2>
+          <h2 className="mb-4 text-2xl font-bold">{t("course.students")}</h2>
           <form className="max-w-sm px-4 pl-0 mb-2">
             <div className="relative">
               <svg
@@ -130,7 +128,7 @@ const Course = () => {
               </svg>
               <input
                 type="text"
-                placeholder="Search"
+                placeholder={t("course.search")}
                 onChange={(event) => onSearch(event.target.value)}
                 value={search}
                 className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
@@ -142,10 +140,10 @@ const Course = () => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3">
-                    Username
+                    {t("course.username")}
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    completed
+                    {t("course.completed")}
                   </th>
                   <th scope="col" className="px-6 py-3"></th>
                 </tr>
@@ -172,7 +170,7 @@ const Course = () => {
                         }}
                         className="text-blue-500"
                       >
-                        Details
+                        {t("course.details")}
                       </button>
                     </td>
                   </tr>
