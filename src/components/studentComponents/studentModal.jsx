@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 const StudentModal = (props) => {
   const [t, i18n] = useTranslation("common");
-  console.log(props.student);
 
   if (!props.show) {
     return null;

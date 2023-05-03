@@ -23,25 +23,27 @@ const Course = () => {
     courseService.getById(courseId).then((course) => {
       setCourse(course);
       console.log(course);
-      
+
       // get students from the course assignments
       const students = [];
       for (const assignment of course.assignments) {
         for (const result of assignment.results) {
-          const id = result.student._id;
-          const username = result.student.username;
-          let student = students.find((student) => student.id === id);
-          if (!student) {
-            student = { id, username, results: [] };
-            students.push(student);
+          if (result.student != null) {
+            const id = result.student._id;
+            const username = result.student.username;
+            let student = students.find((student) => student.id === id);
+            if (!student) {
+              student = { id, username, results: [] };
+              students.push(student);
+            }
+            student.results.push({
+              id: result._id,
+              assignment: assignment.name,
+              attempts: result.attempts,
+              passed: result.passed,
+              points: result.passed ? assignment.points : 0,
+            });
           }
-          student.results.push({
-            id: result._id,
-            assignment: assignment.name,
-            attempts: result.attempts,
-            passed: result.passed,
-            points: result.passed ? assignment.points : 0,
-          });
         }
       }
       setStudents(students);
