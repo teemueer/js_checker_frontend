@@ -23,7 +23,7 @@ const Course = () => {
     courseService.getById(courseId).then((course) => {
       setCourse(course);
       console.log(course);
-
+      
       // get students from the course assignments
       const students = [];
       for (const assignment of course.assignments) {
@@ -44,7 +44,6 @@ const Course = () => {
           });
         }
       }
-
       setStudents(students);
     });
   }, [courseId]);
@@ -130,7 +129,7 @@ const Course = () => {
         </div>
       </div>
       <div className="w-1/2 ml-10">
-        <h2 className="mb-4 text-2xl font-bold">Students</h2>
+        <h2 className="mb-4 text-2xl font-bold">{t("course.students")}</h2>
         <form className="max-w-sm px-4 pl-0 mb-2">
           <div className="relative">
             <svg
@@ -149,7 +148,7 @@ const Course = () => {
             </svg>
             <input
               type="text"
-              placeholder="Search"
+              placeholder={t("course.search")}
               onChange={(event) => onSearch(event.target.value)}
               value={search}
               className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
@@ -161,10 +160,10 @@ const Course = () => {
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Username
+                  {t("course.username")}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  completed
+                  {t("course.completed")}
                 </th>
                 <th scope="col" className="px-6 py-3"></th>
               </tr>
@@ -191,7 +190,7 @@ const Course = () => {
                       }}
                       className="text-blue-500"
                     >
-                      Details
+                      {t("course.details")}
                     </button>
                   </td>
                 </tr>
