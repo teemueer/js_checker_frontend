@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 const StudentModal = (props) => {
   const [t, i18n] = useTranslation("common");
+  console.log(props.student);
 
   if (!props.show) {
     return null;
@@ -14,7 +15,6 @@ const StudentModal = (props) => {
     }, 0);
     return sum;
   };
-
 
   /*
 
@@ -66,11 +66,12 @@ const StudentModal = (props) => {
               {t("student_modal.student_username")} {props.student.username}
             </h2>
             <p>
-              {t("student_modal.student_completed")} {temp.length} /
-              {props.course.assignments.length}{" "}
+              {t("student_modal.student_completed")}{" "}
+              {props.student.results.length} / {props.course.assignments.length}{" "}
             </p>
             <p>
-              {t("student_modal.student_points")} {countSum(temp)} /{" "}
+              {t("student_modal.student_points")}{" "}
+              {countSum(props.student.results)} /{" "}
               {countSum(props.course.assignments)}
             </p>
           </div>
