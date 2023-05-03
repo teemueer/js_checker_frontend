@@ -93,20 +93,21 @@ const Course = () => {
                   <tr
                     key={assg._id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <td
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    <td
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      <Link to={`/assignments/${assg._id}`}>{assg.name}</Link>
-                    </td>
-                    <td className="px-6 py-4">{assg.points}</td>
-                    <td className="px-6 py-4">{assg.description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    <Link to={`/assignments/${assg._id}`}>{assg.name}</Link>
+                  </td>
+                  <td className="px-6 py-4">{assg.points}</td>
+                  <td className="px-6 py-4 overflow-ellipsis overflow-hidden whitespace-nowrap w-max">
+                    {assg.description}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
         <div className="m-4 w-1/2">
           <h2 className="mb-4 text-2xl font-bold">{t("course.students")}</h2>
@@ -153,11 +154,23 @@ const Course = () => {
                   <tr
                     key={student._id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  <td
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    <td
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    <p>{student.username}</p>
+                  </td>
+                  <td className="px-6 py-4">
+                    {student.results.length} / {course.assignments.length}
+                  </td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => {
+                        setShow(true), setModalStudent(student);
+                      }}
+                      className="text-blue-500"
                     >
+
                       <p>{student.username}</p>
                     </td>
                     <td className="px-6 py-4">
@@ -180,14 +193,14 @@ const Course = () => {
             </table>
           </div>
         </div>
-        <StudentModal
-          student={modalStudent}
-          course={course}
-          show={show}
-          onClose={() => setShow(false)}
-        />
       </div>
-    </>
+      <StudentModal
+        student={modalStudent}
+        course={course}
+        show={show}
+        onClose={() => setShow(false)}
+      />
+    </div>
   );
 };
 

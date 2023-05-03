@@ -1,5 +1,7 @@
 //To check if the URL provided by the student is valid.
 import axios from "axios";
+import { headers } from "./login";
+
 let baseUrl = "/api/student";
 let assignmentURL = "/api/assignments";
 
@@ -23,8 +25,8 @@ const getStudents = async () => {
   return res.data;
 };
 
-const getStudentsInCourse = async (id) => {
-  const res = await axios.post(`${baseUrl}/test`, { id: id });
+const getStudentsInCourse = async (courseId) => {
+  const res = await axios.get(`${baseUrl}/course/${courseId}`, { headers });
   return res.data;
 };
 

@@ -93,8 +93,8 @@ const App = () => {
         <Route path="/" element={<PublicRoute />}>
           <Route path="login" element={<Login login={login} />} />
           <Route path="register" element={<Register />} />
-          <Route path="/student/:id" element={<Student />} />
         </Route>
+        <Route path="/student/:id" element={<Student />} />
       </Routes>
     </>
   );
