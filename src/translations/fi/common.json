@@ -135,5 +135,11 @@
       "copy": "Osoite kopioitu",
       "error": "Virhe"
     }
+  },
+  "student": {
+    "assignment": "Tehtävä",
+    "points": "Pisteet",
+    "url": "Osoite ratkaisuusi",
+    "evaluate": "ARVIOI"
   }
 }

@@ -62,7 +62,7 @@ const Assignment = () => {
   const onCopyAssg = () => {
     console.log("onCopyAssg", window.location);
     const host = window.location.host;
-    const studentUrl = `${host}/student/${assgId}`;
+    const studentUrl = `${host}/#/student/${assgId}`;
     navigator.clipboard.writeText(studentUrl);
     toast.info(t("toasts.assignment.copy"));
   };
