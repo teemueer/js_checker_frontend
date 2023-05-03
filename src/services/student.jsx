@@ -2,7 +2,7 @@
 import axios from "axios";
 import { headers } from "./login";
 
-let baseUrl = "/api/student";
+let baseUrl = "/api/students";
 let assignmentURL = "/api/assignments";
 
 if (process.env.NODE_ENV === "development") {
