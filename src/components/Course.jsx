@@ -22,6 +22,7 @@ const Course = () => {
   useEffect(() => {
     courseService.getById(courseId).then((course) => {
       setCourse(course);
+      console.log(course);
 
       // get students from the course assignments
       const students = [];

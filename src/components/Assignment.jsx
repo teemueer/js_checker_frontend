@@ -261,7 +261,7 @@ const Assignment = () => {
   if (!assg) return;
 
   return (
-    <div className="m-3">
+    <div className="m-3 w-1/2">
       <div id="assignment-controls">
         <Controls
           assg={assg}
