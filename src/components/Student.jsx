@@ -3,8 +3,11 @@ import studentService from "../services/student";
 import assignmentService from "../services/assignments";
 import { useMatch, useOutlet } from "react-router-dom";
 import LoadingAnim from "./studentComponents/loadingAnim";
+import { useTranslation } from "react-i18next";
 
 const Student = () => {
+  const [t, i18n] = useTranslation("common");
+
   const [url, setURL] = useState();
   const [assg, setAssg] = useState();
   const [res, setRes] = useState(null);
@@ -54,8 +57,12 @@ const Student = () => {
                   {assg.course.name}
                 </h2>
                 <div className="mt-5 flex flex-row justify-around">
-                  <p>Assignment: {assg.name}</p>
-                  <p>Points: {assg.points}</p>
+                  <p>
+                    {t("student.assignment")}: {assg.name}
+                  </p>
+                  <p>
+                    {t("student.points")}: {assg.points}
+                  </p>
                 </div>
                 <div className="mb-1 mt-5 max-h-[120px] overflow-y-scroll">
                   <p>{assg.description}</p>
@@ -65,7 +72,7 @@ const Student = () => {
               <div className=" flex flex-col w-3/5 items-center">
                 {!showres && !loading && (
                   <>
-                    <p className="mb-3 px-1">Url to your assignment</p>
+                    <p className="mb-3 px-1">{t("student.url")}:</p>
                     <input
                       type="text"
                       className=" w-full bg-grray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -79,7 +86,7 @@ const Student = () => {
                       data-te-ripple-init
                       onClick={() => onEvaluate()}
                     >
-                      Evaluate
+                      {t("student.evaluate")}
                     </button>
                   </>
                 )}

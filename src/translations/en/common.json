@@ -135,5 +135,11 @@
       "copy": "URL copied",
       "error": "Error"
     }
+  },
+  "student": {
+    "assignment": "Assignment",
+    "points": "Points",
+    "url": "URL to your solution",
+    "evaluate": "EVALUATE"
   }
 }
