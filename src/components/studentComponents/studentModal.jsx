@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const StudentModal = (props) => {
+  const [t, i18n] = useTranslation("common");
+
   if (!props.show) {
     return null;
   }
@@ -12,8 +15,8 @@ const StudentModal = (props) => {
     return sum;
   };
 
+  //Temporary fix. Try to implement backend solution if ther is time
   let temp = [];
-
   for (let i = 0; i < props.course.assignments.length; i++) {
     for (let j = 0; j < props.student.results.length; j++) {
       if (
@@ -23,11 +26,11 @@ const StudentModal = (props) => {
           name: props.course.assignments[i].name,
           attempts: props.student.results[j].attempts,
           passed: props.student.results[j].passed,
+          points: props.student.results[j].points,
         });
       }
     }
   }
-
   console.log(temp);
 
   if (!props.student) return;
@@ -44,22 +47,27 @@ const StudentModal = (props) => {
         >
           <div className="w-full h-1/4 mb-5">
             <div className="flex flex-row w-full justify-between mb-1">
-              <h1 className="font-bold text-xl">Student details</h1>
+              <h1 className="font-bold text-xl">
+                {t("student_modal.student_details")}
+              </h1>
               <button
                 type="button"
                 onClick={props.onClose}
                 className="text-white font-extrabold bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-4 py-2 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                Close
+                {t("student_modal.close")}
               </button>
             </div>
-            <h2> Username: {props.student.username}</h2>
+            <h2>
+              {" "}
+              {t("student_modal.student_username")} {props.student.username}
+            </h2>
             <p>
-              Completed: {props.student.results.length} /
+              {t("student_modal.student_completed")} {temp.length} /
               {props.course.assignments.length}{" "}
             </p>
             <p>
-              Total points: {countSum(props.student.results)} /{" "}
+              {t("student_modal.student_points")} {countSum(temp)} /{" "}
               {countSum(props.course.assignments)}
             </p>
           </div>
@@ -68,13 +76,13 @@ const StudentModal = (props) => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3">
-                    Assignment
+                    {t("student_modal.assignment")}
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Attempts
+                    {t("student_modal.attempts")}
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Result
+                    {t("student_modal.result")}
                   </th>
                 </tr>
               </thead>
